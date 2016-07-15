@@ -1,40 +1,34 @@
-// main.js
+var roleHarvester = require('role.harvester');
+var roleUpgrader = require('role.upgrader');
+var roleBuilder = require('role.builder');
 
-// Initialize the game
-require('init');
+module.exports.loop = function () {
 
-// Process the creeps
-var builder = require('builder');
-var guard = require('guard');
-var harvester = require('harvester');
-var healer = require('healer');
-for (var name in Game.creeps) {
-    var creep = Game.creeps[name];
-    switch (creep.memory.role) {
-        case 'builder':
-            builder(creep);
-            break;
-        case 'guard':
-            guard(creep);
-            break;
-        case 'harvester':
-            harvester(creep);
-            break;
-        case 'healer':
-            healer(creep);
-            break;
-        default:
-            // idle
-            break;
+    var tower = Game.getObjectById('TOWER_ID');
+    if(tower) {
+        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: (structure) => structure.hits < structure.hitsMax
+        });
+        if(closestDamagedStructure) {
+            tower.repair(closestDamagedStructure);
+        }
+
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if(closestHostile) {
+            tower.attack(closestHostile);
+        }
+    }
+
+    for(var name in Game.creeps) {
+        var creep = Game.creeps[name];
+        if(creep.memory.role == 'harvester') {
+            roleHarvester.run(creep);
+        }
+        if(creep.memory.role == 'upgrader') {
+            roleUpgrader.run(creep);
+        }
+        if(creep.memory.role == 'builder') {
+            roleBuilder.run(creep);
+        }
     }
 }
-
-// Process the spawns
-var population = require('population');
-for(var name in Game.spawns) {
-    population(Game.spawns[name]);
-}
-
-// Cleanup dead objects
-require('garbagecollector');
-
