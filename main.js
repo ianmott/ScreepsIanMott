@@ -5,9 +5,9 @@ var rolerepairer = require('role.repairer')
 module.exports.loop = function () {
 
     var minharvester = 5;
-	var minbuilder = 4;
+	var minbuilder = 5;
 	var minupgrader = 7;
-	var minrepairer = 3;
+	var minrepairer = 4;
     var harvester = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var builder = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     var upgrader = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
