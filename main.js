@@ -10,9 +10,9 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var rolerepairer = require('role.repairer')
 
-//let builder = require('./builder');
+let builder = require('./builder');
 let controller_def = require('./controller_def');
-//let controller_harv = require('./controller_harv');
+let controller_harv = require('./controller_harv');
 let controller_tower = require('./controller_tower');
 
 module.exports.loop = function() {
