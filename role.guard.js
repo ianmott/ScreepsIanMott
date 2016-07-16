@@ -8,10 +8,8 @@
  */
 
 
-var role.guard = {
-    doWork: function() {
-        var creep = this._creep;
-
+var roleguard = {
+    run: function(creep) {
         var targets = creep.room.find(Game.HOSTILE_CREEPS);
         if(targets.length) {
             creep.moveTo(targets[0]);
@@ -20,4 +18,4 @@ var role.guard = {
     }
 };
 
-module.exports = role.guard;
+module.exports = roleguard;
