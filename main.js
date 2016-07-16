@@ -20,14 +20,14 @@ module.exports.loop = function() {
     
     controller_tower.run();
     controller_def.run();
-    controller_harv.run();
+    // controller_harv.run();
     // builder.run();
 	
 	
-    var minharvester = 5;
-	var minbuilder = 6;
-	var minupgrader = 6;
-	var minrepairer = 2;
+    var minharvester = 4;
+	var minbuilder = 5;
+	var minupgrader = 5;
+	var minrepairer = 3;
     var harvester = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var builder = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     var upgrader = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -52,13 +52,6 @@ module.exports.loop = function() {
         var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'repairer'});
         console.log('h#/X='+harvester.length+'/'+minharvester+' b#/X='+builder.length+'/'+minbuilder+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
         console.log('Spawning new repairer: ' + newName);
-    }
-    //default
-    else
-    if(upgrader.length < minharvester && Game.spawns.Spawn1.energy > 299) {
-        var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester'});
-        console.log('h#/X='+harvester.length+'/'+minharvester+' b#/X='+builder.length+'/'+minbuilder+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
-        console.log('Spawning new harvester: ' + newName);
     }
     
     for(var name in Game.creeps) {
