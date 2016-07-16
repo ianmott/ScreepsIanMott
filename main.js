@@ -25,9 +25,9 @@ module.exports.loop = function() {
 	
 	
     var minharvester = 5;
-	var minbuilder = 7;
-	var minupgrader = 7;
-	var minrepairer = 4;
+	var minbuilder = 6;
+	var minupgrader = 6;
+	var minrepairer = 2;
     var harvester = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var builder = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     var upgrader = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -35,25 +35,30 @@ module.exports.loop = function() {
     // console.log('h#/X='+harvester.length+'/'+minbuilder+' b#/X='+builder.length+'/'+minharvester+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
     if(harvester.length < minharvester && Game.spawns.Spawn1.energy > 299) {
         var newName = Game.spawns.Spawn1.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'harvester'});
+        console.log('h#/X='+harvester.length+'/'+minharvester+' b#/X='+builder.length+'/'+minbuilder+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
         console.log('Spawning new harvester: ' + newName);
     }else
     if(upgrader.length < minupgrader && Game.spawns.Spawn1.energy > 299) {
         var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader'});
+        console.log('h#/X='+harvester.length+'/'+minharvester+' b#/X='+builder.length+'/'+minbuilder+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
         console.log('Spawning new Upgrader: ' + newName);
     }else
     if(builder.length < minbuilder && Game.spawns.Spawn1.energy > 299) {
         var newName = Game.spawns.Spawn1.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'builder'});
+        console.log('h#/X='+harvester.length+'/'+minharvester+' b#/X='+builder.length+'/'+minbuilder+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
         console.log('Spawning new builder: ' + newName);
     }else
-    if(repairer.length < minrepairer && Game.spawns.Spawn1.energy > 200) {
-        var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE], undefined, {role: 'repairer'});
+    if(repairer.length < minrepairer && Game.spawns.Spawn1.energy > 299) {
+        var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'repairer'});
+        console.log('h#/X='+harvester.length+'/'+minharvester+' b#/X='+builder.length+'/'+minbuilder+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
         console.log('Spawning new repairer: ' + newName);
     }
     //default
     else
-    if(upgrader.length < minupgrader && Game.spawns.Spawn1.energy > 299) {
-        var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader'});
-        console.log('Spawning new Upgrader: ' + newName);
+    if(upgrader.length < minharvester && Game.spawns.Spawn1.energy > 299) {
+        var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester'});
+        console.log('h#/X='+harvester.length+'/'+minharvester+' b#/X='+builder.length+'/'+minbuilder+' u#/X='+upgrader.length+'/'+minupgrader+' r#/X='+repairer.length+'/'+minrepairer);
+        console.log('Spawning new harvester: ' + newName);
     }
     
     for(var name in Game.creeps) {

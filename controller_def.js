@@ -5,7 +5,7 @@ let _ = require('lodash');
 _.defaultsDeep(Memory, {
     def: {
         /** @type {number} */
-        numCreeps: 2
+        numCreeps: 1
     }
 });
 
