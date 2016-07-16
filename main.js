@@ -1,20 +1,13 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
-
+var rolerepairer = require('role.repairer')
 module.exports.loop = function () {
-// check for memory entries of died creeps by iterating over Memory.creeps
-    for (let name in Memory.creeps) {
-        // and checking if the creep is still alive
-        if (Game.creeps[name] == undefined) {
-            // if not, delete the memory entry
-            delete Memory.creeps[name];
-        }
-    };
+
     var minharvester = 5;
 	var minbuilder = 4;
 	var minupgrader = 7;
-	var minrepairer = 2;
+	var minrepairer = 0;
     var harvester = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var builder = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     var upgrader = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -64,4 +57,14 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
     }
+    
+    // check for memory entries of died creeps by iterating over Memory.creeps
+    for (let name in Memory.creeps) {
+        // and checking if the creep is still alive
+        if (Game.creeps[name] == undefined) {
+            // if not, delete the memory entry
+            delete Memory.creeps[name];
+        }
+    };
+    
 }
