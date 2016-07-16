@@ -25,7 +25,7 @@ module.exports.loop = function() {
 	
 	
     var minharvester = 5;
-	var minbuilder = 5;
+	var minbuilder = 7;
 	var minupgrader = 7;
 	var minrepairer = 4;
     var harvester = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');

@@ -9,7 +9,7 @@ let should = require('./should');
 _.defaultsDeep(Memory, {
     harv: {
         /** @type {number} */
-        numCreeps: 2
+        numCreeps: 1
     }
 });
 
