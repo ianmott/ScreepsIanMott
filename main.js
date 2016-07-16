@@ -1,9 +1,29 @@
+/** @module main */
+
+require('./ext_Array');
+require('./ext_Creep');
+require('./ext_Object');
+require('./ext_Room');
+require('./ext_StructureTower');
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var rolerepairer = require('role.repairer')
-module.exports.loop = function () {
 
+let builder = require('./builder');
+let controller_def = require('./controller_def');
+let controller_harv = require('./controller_harv');
+let controller_tower = require('./controller_tower');
+
+module.exports.loop = function() {
+    for (let name in Memory.creeps) { if (!Game.creeps[name]) { delete Memory.creeps[name]; } }
+    
+    controller_tower.run();
+    controller_def.run();
+    controller_harv.run();
+    // builder.run();
+	
+	
     var minharvester = 5;
 	var minbuilder = 5;
 	var minupgrader = 7;
@@ -36,21 +56,6 @@ module.exports.loop = function () {
         console.log('Spawning new Upgrader: ' + newName);
     }
     
-    var tower = Game.getObjectById('TOWER_ID');
-    if(tower) {
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
-        }
-
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            tower.attack(closestHostile);
-        }
-    }
-
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
@@ -66,14 +71,9 @@ module.exports.loop = function () {
             rolerepairer.run(creep);
         }
     }
-    
-    // check for memory entries of died creeps by iterating over Memory.creeps
-    for (let name in Memory.creeps) {
-        // and checking if the creep is still alive
-        if (Game.creeps[name] == undefined) {
-            // if not, delete the memory entry
-            delete Memory.creeps[name];
-        }
-    };
-    
-}
+	
+};
+
+G = require('./G');
+W = require('./W');
+util = require('./util');
