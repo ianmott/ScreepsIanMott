@@ -18,7 +18,7 @@ var rolerepairer = {
                 // the second argument for findClosestByPath is an object which takes
                 // a property called filter which can be a function
                 // we use the arrow operator to define it
-                filter: (s) => s.hits < s.hitsMax * ((s.structureType = STRUCTURE_WALL)* -0.99+1) 
+                filter: (s) => s.hits < s.hitsMax * ((s.structureType == STRUCTURE_WALL)* -0.99995+1) * ((s.structureType == STRUCTURE_RAMPART)* -0.9+1) 
             });
 
             // if we find one
