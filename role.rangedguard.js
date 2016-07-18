@@ -10,10 +10,20 @@
 
 var rolerangedguard = {
     run: function(creep) {
-        var targets = creep.room.find(Game.HOSTILE_CREEPS);
-        if(targets.length) {
-            creep.moveTo(targets[0]);
-            creep.rangedAttack(targets[0]);
+        var targets = creep.room.find(Game.HOSTILE_CREEPS, {
+                    filter: (creep) => {
+                        return (creep.hits < creep.hitsMax);
+                    }
+            });
+            if(targets.length > 0) {
+                if(creep.moveTo(targets[0])) {
+                    creep.moveTo(targets[0]);
+                    creep.rangedAttack(targets[0]);
+                }
+            }else {
+            if(creep.moveTo(creep.room.controller) != ERR_NOT_IN_RANGE) {
+                creep.moveTo(creep.room.controller);
+            }
         }
     }
 };
