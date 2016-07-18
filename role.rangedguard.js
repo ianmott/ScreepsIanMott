@@ -20,11 +20,12 @@ var rolerangedguard = {
                     creep.moveTo(targets[0]);
                     creep.rangedAttack(targets[0]);
                 }
-            }else {
-            if(creep.moveTo(creep.room.controller) != ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller);
             }
-        }
+            //else {
+            //if(creep.moveTo(creep.room.controller) != ERR_NOT_IN_RANGE) {
+            //    creep.moveTo(creep.room.controller);
+                //}
+            //}
     }
 };
 
