@@ -21,20 +21,20 @@ module.exports.loop = function() {
 	var toggle = false;
     var Types = new Array(NumofTypes);           // Type Name     Type Min       Type Current
         // Parts                                                        Cost
-    Types[0] = new Array(5); Types[0][0] = 'harvester'; Types[0][1] = 5; Types[0][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester').length;   
-        Types[0][3] = [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE];  Types[0][4] = 649;
-    Types[1] = new Array(5); Types[1][0] = 'guard';     Types[1][1] = 3; Types[1][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard').length; 
-        Types[1][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE]; Types[1][4] = 649;
-    Types[2] = new Array(5); Types[2][0] = 'upgrader';  Types[2][1] = 8; Types[2][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader').length;   
-        Types[2][3] = [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];  Types[2][4] = 649;
+    Types[0] = new Array(5); Types[0][0] = 'harvester'; Types[0][1] = 3; Types[0][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester').length;   
+        Types[0][3] = [WORK,WORK,WORK,CARRY,MOVE,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];  Types[0][4] = 699;
+    Types[1] = new Array(5); Types[1][0] = 'guard';     Types[1][1] = 4; Types[1][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard').length; 
+        Types[1][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE]; Types[1][4] = 749;
+    Types[2] = new Array(5); Types[2][0] = 'upgrader';  Types[2][1] = 5; Types[2][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader').length;   
+        Types[2][3] = [MOVE,WORK,MOVE,CARRY,WORK,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,MOVE];  Types[2][4] = 699;
     Types[3] = new Array(5); Types[3][0] = 'repairer';  Types[3][1] = 3; Types[3][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer').length;    
-        Types[3][3] = [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];           Types[3][4] = 649;
+        Types[3][3] = [MOVE,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];           Types[3][4] = 699;
     Types[4] = new Array(5); Types[4][0] = 'builder';   Types[4][1] = 3; Types[4][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder').length;     
-        Types[4][3] = [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];   Types[4][4] = 649;
-    Types[5] = new Array(5); Types[5][0] = 'rangedguard';Types[5][1] = 1; Types[5][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'rangedguard').length; 
-        Types[5][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK]; Types[5][4] = 649;
+        Types[4][3] = [MOVE,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];   Types[4][4] = 749;
+    Types[5] = new Array(5); Types[5][0] = 'rangedguard';Types[5][1] = 3; Types[5][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'rangedguard').length; 
+        Types[5][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK]; Types[5][4] = 749;
     Types[6] = new Array(5); Types[6][0] = 'tharvester';Types[6][1] = 1; Types[6][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'tharvester').length; 
-        Types[6][3] = [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; Types[6][4] = 649;
+        Types[6][3] = [MOVE,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; Types[6][4] = 699;
     
     if (Game.time%10<1){ 
         console.log('Energy:'+Game.spawns.Spawn1.room.energyAvailable+' h='+Types[0][2]+'/'+Types[0][1]+' th='+Types[6][2]+'/'+Types[6][1]+' b='+Types[4][2]+'/'+Types[4][1]+' u='+Types[2][2]+'/'+Types[2][1]+' r='+Types[3][2]+'/'+Types[3][1]+' g='+Types[1][2]+'/'+Types[1][1]+' rg='+Types[5][2]+'/'+Types[5][1]);
