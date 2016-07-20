@@ -19,13 +19,13 @@ module.exports.run = function() {
             else {
                 targets = _.sortBy(room.find(FIND_MY_CREEPS, { filter: s => s.hits < s.hitsMax }), s => s.hits);
                 if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().heal(targets.shift()); } }
-                //else if (_.some(towers)) {
-                 //   targets = _.sortBy(room.find(FIND_MY_STRUCTURES, { filter: s => s.CONTROLLER_RESERVE < s.CONTROLLER_RESERVE_MAX }), s => s.CONTROLLER_RESERVE);
-                //   if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().upgradeController(targets.shift()); } }
-                //    else if (_.some(towers)) {
-                //        targets = _.sortBy(room.find(FIND_STRUCTURES, { filter: s => should.tower.repair(s) }), s => s.hits);
-                //        if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().repair(targets.shift()); } }
-                 //   }
+                else if (_.some(towers)) {
+                    targets = _.sortBy(room.find(FIND_MY_STRUCTURES, { filter: s => s.CONTROLLER_RESERVE < s.CONTROLLER_RESERVE_MAX }), s => s.CONTROLLER_RESERVE);}
+                    if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().upgradeController(targets.shift()); } }
+                    //else if (_.some(towers)) {
+                    //    targets = _.sortBy(room.find(FIND_STRUCTURES, { filter: s => should.tower.repair(s) }), s => s.hits);
+                    //    if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().repair(targets.shift()); } }
+                    //}
                 //}
             }
         }

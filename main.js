@@ -8,7 +8,7 @@ var roleBuilder = require('role.builder');
 var rolerepairer = require('role.repairer');
 var roleguard = require('role.guard');
 var rolerangedguard = require('role.rangedguard');
-
+var roleatcontroller = require('role.atcontroller');
 let controller_tower = require('./controller_tower');
 
 module.exports.loop = function() {
@@ -17,29 +17,36 @@ module.exports.loop = function() {
     controller_tower.run();
 	
 	// Variables
-	var NumofTypes = 7;
+	var NumofTypes = 8;
 	var toggle = false;
     var Types = new Array(NumofTypes);           // Type Name     Type Min       Type Current
         // Parts                                                        Cost
-    Types[0] = new Array(5); Types[0][0] = 'harvester'; Types[0][1] = 3; Types[0][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester').length;   
-        Types[0][3] = [WORK,WORK,WORK,CARRY,MOVE,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];  Types[0][4] = 699;
-    Types[1] = new Array(5); Types[1][0] = 'guard';     Types[1][1] = 4; Types[1][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard').length; 
-        Types[1][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE]; Types[1][4] = 749;
-    Types[2] = new Array(5); Types[2][0] = 'upgrader';  Types[2][1] = 5; Types[2][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader').length;   
-        Types[2][3] = [MOVE,WORK,MOVE,CARRY,WORK,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,MOVE];  Types[2][4] = 699;
-    Types[3] = new Array(5); Types[3][0] = 'repairer';  Types[3][1] = 3; Types[3][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer').length;    
-        Types[3][3] = [MOVE,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];           Types[3][4] = 699;
-    Types[4] = new Array(5); Types[4][0] = 'builder';   Types[4][1] = 3; Types[4][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder').length;     
-        Types[4][3] = [MOVE,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];   Types[4][4] = 749;
-    Types[5] = new Array(5); Types[5][0] = 'rangedguard';Types[5][1] = 3; Types[5][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'rangedguard').length; 
-        Types[5][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK]; Types[5][4] = 749;
-    Types[6] = new Array(5); Types[6][0] = 'tharvester';Types[6][1] = 1; Types[6][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'tharvester').length; 
-        Types[6][3] = [MOVE,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; Types[6][4] = 699;
+    Types[0] = new Array(5); Types[0][0] = 'harvester'; Types[0][1] = 3; Types[0][4] = 1199; Types[0][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester').length;   
+        Types[0][3] = [WORK,WORK,CARRY,CARRY,MOVE,CARRY,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];  
+    Types[1] = new Array(5); Types[1][0] = 'guard';     Types[1][1] = 1; Types[1][4] = 1199; Types[1][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard').length; 
+        Types[1][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE,ATTACK,MOVE,MOVE]; 
+    Types[2] = new Array(5); Types[2][0] = 'upgrader';  Types[2][1] = 0; Types[2][4] = 1199; Types[2][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader').length;   
+        Types[2][3] = [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,WORK,WORK,MOVE,CARRY,CARRY,MOVE,MOVE]; 
+    Types[3] = new Array(5); Types[3][0] = 'repairer';  Types[3][1] = 0;  Types[3][4] = 1199; Types[3][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer').length;    
+        Types[3][3] = [CARRY,WORK,WORK,WORK,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; 
+    Types[4] = new Array(5); Types[4][0] = 'builder';   Types[4][1] = 0;  Types[4][4] = 1199; Types[4][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder').length;     
+        Types[4][3] = [WORK,WORK,WORK,WORK,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];  
+    Types[5] = new Array(5); Types[5][0] = 'rangedguard';Types[5][1] = 1; Types[5][4] = 1199; Types[5][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'rangedguard').length; 
+        Types[5][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK];
+    Types[6] = new Array(5); Types[6][0] = 'tharvester';Types[6][1] = 1;  Types[6][4] = 999; Types[6][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'tharvester').length; 
+        Types[6][3] = [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];
+    Types[7] = new Array(5); Types[7][0] = 'atcontroller';Types[7][1] = 0; Types[7][4] = 849; Types[7][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'atcontroller').length; 
+        Types[7][3] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE];
     
     if (Game.time%10<1){ 
-        console.log('Energy:'+Game.spawns.Spawn1.room.energyAvailable+' h='+Types[0][2]+'/'+Types[0][1]+' th='+Types[6][2]+'/'+Types[6][1]+' b='+Types[4][2]+'/'+Types[4][1]+' u='+Types[2][2]+'/'+Types[2][1]+' r='+Types[3][2]+'/'+Types[3][1]+' g='+Types[1][2]+'/'+Types[1][1]+' rg='+Types[5][2]+'/'+Types[5][1]);
+        console.log('Energy:'+Game.spawns.Spawn1.room.energyAvailable+' h='+Types[0][2]+'/'+Types[0][1]+' th='+Types[6][2]+'/'+Types[6][1]+' b='+Types[4][2]+'/'+Types[4][1]+' u='+Types[2][2]+'/'+Types[2][1]+' r='+Types[3][2]+'/'+Types[3][1]+' g='+Types[1][2]+'/'+Types[1][1]+' rg='+Types[5][2]+'/'+Types[5][1]+' at='+Types[7][2]+'/'+Types[7][1]);
     }
-    
+    if (Types[0][2] == 1){
+        if (Game.spawns.Spawn1.room.energyAvailable > 999){
+            var newName = Game.spawns.Spawn1.createCreep([WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], undefined, {role: Types[0][0]});
+            console.log('Spawning new '+Types[0][0]+': ' + newName);
+        }
+    } else
     for (i=0; i <NumofTypes; i++){
         if (Types[i][1] > Types[i][2] && Game.spawns.Spawn1.room.energyAvailable > Types[i][4] && !toggle){         
             var newName = Game.spawns.Spawn1.createCreep(Types[i][3], undefined, {role: Types[i][0]});
@@ -56,6 +63,8 @@ module.exports.loop = function() {
         if(creep.memory.role == 'repairer') {   rolerepairer.run(creep); }
         if (creep.memory.role == 'guard'){      roleguard.run(creep); }
         if (creep.memory.role == 'rangedguard'){rolerangedguard.run(creep);}
+        if (creep.memory.role == 'atcontroller'){roleatcontroller.run(creep);}
+        
     }
     //console.log(Game.time);
 };
