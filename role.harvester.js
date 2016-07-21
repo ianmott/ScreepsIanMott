@@ -9,11 +9,8 @@ var roleHarvester = {
             creep.memory.Counter = 22;}else{if(creep.memory.Counter>0) {creep.memory.Counter--;}}
         var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-//                            structure.structureType == STRUCTURE_TOWER ||
-                    return (
-                            structure.structureType == STRUCTURE_EXTENSION ||
-                            structure.structureType == STRUCTURE_SPAWN ||
-                            structure.structureType == STRUCTURE_CONTAINER 
+                //    return (structure.structureType == STRUCTURE_TOWER
+                    return (structure.structureType == STRUCTURE_EXTENSION ||structure.structureType == STRUCTURE_SPAWN ||structure.structureType == STRUCTURE_CONTAINER 
                             ) && structure.energy < structure.energyCapacity ;
                 }
             });
@@ -23,8 +20,8 @@ var roleHarvester = {
             creep.memory.Counter = 22;
         }
         if( creep.carry.energy < creep.carryCapacity && creep.memory.Counter == 0 ) {
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1]);
             } 
         } 
         if(targets.length > 0 && creep.memory.Counter > 0) {
