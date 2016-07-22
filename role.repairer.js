@@ -18,7 +18,7 @@ var rolerepairer = {
                 // the second argument for findClosestByPath is an object which takes
                 // a property called filter which can be a function
                 // we use the arrow operator to define it
-                filter: (s) => s.hits < s.hitsMax * ((s.structureType == STRUCTURE_WALL)* -0.99992+1) * ((s.structureType == STRUCTURE_RAMPART)* -0.999+1) 
+                filter: (s) => s.hits < s.hitsMax * ((s.structureType == STRUCTURE_WALL)* -0.99999+1) * ((s.structureType == STRUCTURE_RAMPART)* -0.999+1) 
             });
 
             // if we find one
@@ -42,7 +42,7 @@ var rolerepairer = {
         } 
         else {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE && sources[0].energy > 0) {
                 creep.moveTo(sources[0]);
             }
         }
