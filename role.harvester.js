@@ -3,10 +3,11 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+        var CounterSet = 25;
         if (creep.memory.Counter && creep.carry.energy == 0) {creep.memory.Counter = 0;}
         if(!creep.memory.Counter) {creep.memory.Counter = 0;}
         if (creep.carry.energy == creep.carryCapacity && creep.memory.Counter == 0){
-            creep.memory.Counter = 10;}else{if(creep.memory.Counter>0) {creep.memory.Counter--;}}
+            creep.memory.Counter = CounterSet;}else{if(creep.memory.Counter>0) {creep.memory.Counter--;}}
         var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                 //    return (structure.structureType == STRUCTURE_TOWER
@@ -17,7 +18,7 @@ var roleHarvester = {
         var sources = creep.room.find(FIND_SOURCES);
         if (sources[0].energy == 0)
         {
-            creep.memory.Counter = 10;
+            creep.memory.Counter = CounterSet;
         }
         if(creep.carry.energy ==0)
         {
@@ -36,7 +37,7 @@ var roleHarvester = {
         {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_CONTROLLER
+                    return (structure.structureType == STRUCTURE_CONTROLLER 
                             ) ;
                 }
             });
@@ -44,8 +45,6 @@ var roleHarvester = {
                 creep.moveTo(targets[0]);
             }
         }
-        
-        //console.log('1');
         
     }
 };

@@ -2,10 +2,11 @@ var roletHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.carry.energy < creep.carryCapacity) {
+        var targetnum = 1;
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+        if(creep.carry.energy < creep.carryCapacity && sources[targetnum].energy > 0) {
+            if(creep.harvest(sources[targetnum]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[targetnum]);
             } 
         }
         else {
@@ -14,7 +15,7 @@ var roletHarvester = {
                         return (structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity ;
                     }
             });
-            if(targets.length > 0) {
+            if(targets.length > 0 && targets[0].energy >0) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
                 }

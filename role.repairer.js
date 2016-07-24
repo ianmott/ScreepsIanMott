@@ -2,7 +2,7 @@ var rolerepairer = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-
+var sources = creep.room.find(FIND_SOURCES);
         if(creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
         }
@@ -40,10 +40,11 @@ var rolerepairer = {
                 }
             }
         } 
-        else {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE && sources[0].energy > 0) {
+        else if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE && sources[0].energy > 0) {
                 creep.moveTo(sources[0]);
+            } else if(creep.memory.building) {
+            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(creep.room.controller);
             }
         }
     }
