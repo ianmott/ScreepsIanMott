@@ -12,8 +12,7 @@ require('./ext_StructureTower');
 let controller_tower = require('./controller_tower');
 var Spawn = {
 
-    run: function() {
-        if (Game.time%10<1){for (let name in Memory.creeps) { if (!Game.creeps[name]) { delete Memory.creeps[name]; } }}
+    run: function(RoomName) {
         controller_tower.run();
         var NumofSpawns = 5;
     	var SpawnRange = new Array(NumofSpawns);
@@ -42,7 +41,7 @@ var Spawn = {
         Types[TWeights[5]] = new Array(numofFields); Types[TWeights[5]][0] = 'rangedguard';  Types[TWeights[5]][1] = 0; Types[TWeights[5]][4] = 1099; Types[TWeights[5]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'rangedguard').length;  Types[TWeights[5]][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK];
         Types[TWeights[6]] = new Array(numofFields); Types[TWeights[6]][0] = 'tharvester';   Types[TWeights[6]][1] = 1;  Types[TWeights[6]][4] = 999; Types[TWeights[6]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'tharvester').length;   Types[TWeights[6]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];
         Types[TWeights[7]] = new Array(numofFields); Types[TWeights[7]][0] = 'atcontroller'; Types[TWeights[7]][1] = 0; Types[TWeights[7]][4] = 849; Types[TWeights[7]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'atcontroller').length;  Types[TWeights[7]][3] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE];
-        
+        //console.log(RoomName);
         if (Game.time%10<1){ 
             var stringbuilder = ' RC: '+Game.spawns.Spawn1.room.controller.progress+'/'+Game.spawns.Spawn1.room.controller.progressTotal+' ECap: '+Game.spawns.Spawn1.room.energyCapacityAvailable+' E: '+Game.spawns.Spawn1.room.energyAvailable;
             var totalCreeps = 0;
@@ -52,8 +51,9 @@ var Spawn = {
                 totalCreeps += Types[TWeights[i]][2];
                 maxCreeps +=Types[TWeights[i]][1];
             }
-            stringbuilder = 'TC: ' + totalCreeps+'/'+maxCreeps+stringbuilder;
+            stringbuilder = RoomName+' TC: ' + totalCreeps+'/'+maxCreeps+stringbuilder;
             console.log(stringbuilder);
+            for (let name in Memory.creeps) { if (!Game.creeps[name]) { delete Memory.creeps[name]; } }
         }
         if (Game.spawns.Spawn1.room.energyCapacityAvailable < Types[0][4]){
             for (j=SpawnRange.length; j > 0 && !toggle;j--)
