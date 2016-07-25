@@ -8,6 +8,8 @@ var rolerepairer = require('role.repairer');
 var roleguard = require('role.guard');
 var rolerangedguard = require('role.rangedguard');
 var roleatcontroller = require('role.atcontroller');
+var rolegather = require('role.gather');
+var rolehaul = require('role.haul');
 
 require('./ext_StructureTower');
 let controller_tower = require('./controller_tower');
@@ -41,6 +43,8 @@ module.exports.loop = function() {
         if (creep.memory.role == 'guard') { roleguard.run(creep); }
         if (creep.memory.role == 'rangedguard') { rolerangedguard.run(creep);}
         if (creep.memory.role == 'atcontroller') { roleatcontroller.run(creep);}
+        if (creep.memory.role == 'gather') { rolegather.run(creep);}
+        if (creep.memory.role == 'haul') { rolehaul.run(creep);}
         
     }
     //console.log(Game.time);

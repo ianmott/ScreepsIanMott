@@ -21,10 +21,10 @@ var roleUpgrader = {
                 creep.moveTo(sources[0]);
             }else
             {
-            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller);
-            }
-            creep.memory.upgrading = true;
+            //if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+            //    creep.moveTo(creep.room.controller);
+            //}
+            //creep.memory.upgrading = true;
             }
         }
     }
