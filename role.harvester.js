@@ -3,7 +3,7 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        var CounterSet = 25;
+        var CounterSet = 35;
         if (creep.memory.Counter && creep.carry.energy == 0) {creep.memory.Counter = 0;}
         if(!creep.memory.Counter) {creep.memory.Counter = 0;}
         if (creep.carry.energy == creep.carryCapacity && creep.memory.Counter == 0){
