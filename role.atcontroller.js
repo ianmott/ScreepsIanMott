@@ -10,29 +10,18 @@
 var atcontroller = {
     run: function(creep) {
         var targetRoomName = "W44S37";
-var targetPos = new RoomPosition(17,0, targetRoomName);
-        if (creep.room.roomName != targetRoomName){
-            if (creep.moveTo(targetPos)){
-                creep.moveTo(targetPos);
-            }
-        } else
-        if(creep.moveTo(creep.room.controller)) {
-            creep.moveTo(creep.room.controller);
-            creep.claimController(creep.room.controller);
-        }
-    
-        //if(creep.room.roomName != dest){
-            //console.log(creep.room.findExitTo(dest));
-        //    creep.moveTo(creep.room.findExitTo(dest));
-        //}
-        //else{
-        //    creep.moveTo(35,0);
-        //}
-            //if(creep.moveTo(creep.room.controller)) {
-           //     creep.moveTo(creep.room.controller);
-           //     creep.claimController(creep.room.controller);
-           // }
+var targetPos = new RoomPosition(12,11, targetRoomName);
+        //if (creep.room.roomName != targetRoomName && false){
+        //    if (creep.moveTo(targetPos)){
+        //        creep.moveTo(targetPos);
+        //    }
+        //} else
         
+        creep.claimController(creep.room.controller);
+        if(creep.moveTo(creep.room.controller, {reusePath: 5})) {
+            creep.moveTo(creep.room.controller, {reusePath: 5});
+            creep.claimController(creep.room.controller);
+        } 
     }
 };
 

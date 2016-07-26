@@ -4,9 +4,10 @@ var roletHarvester = {
     run: function(creep) {
         var targetnum = 1;
             var sources = creep.room.find(FIND_SOURCES);
+            if (sources.length == 1) targetnum = 0;
         if(creep.carry.energy < creep.carryCapacity && sources[targetnum].energy > 0) {
             if(creep.harvest(sources[targetnum]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[targetnum]);
+                creep.moveTo(sources[targetnum], {reusePath: 5});
             } 
         }
         else {
@@ -17,7 +18,7 @@ var roletHarvester = {
             });
             if(targets.length > 0 && targets[0].energy >0) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+                    creep.moveTo(targets[0], {reusePath: 5});
                 }
             }else{
                 var targets = creep.room.find(FIND_STRUCTURES, {
@@ -27,7 +28,7 @@ var roletHarvester = {
                 });
                 if(targets.length > 0) {
                     if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0]);
+                        creep.moveTo(targets[0], {reusePath: 5});
                     }
                 }
             }

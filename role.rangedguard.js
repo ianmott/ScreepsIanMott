@@ -16,8 +16,8 @@ var rolerangedguard = {
                     }
             });
             if(targets.length > 0) {
-                if(creep.moveTo(targets[0])) {
-                    creep.moveTo(targets[0]);
+                if(creep.moveTo(targets[0], {reusePath: 5})) {
+                    creep.moveTo(targets[0], {reusePath: 5});
                     creep.rangedAttack(targets[0]);
                 }
             }

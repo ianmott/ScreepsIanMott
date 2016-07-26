@@ -16,6 +16,10 @@ var roleHarvester = {
                 }
             });
         var sources = creep.room.find(FIND_SOURCES);
+        
+var targetRoomName = "W44S37";
+var targetPos = new RoomPosition(12,11, targetRoomName);
+        
         if (sources[0].energy == 0)
         {
             creep.memory.Counter = CounterSet;
@@ -24,14 +28,20 @@ var roleHarvester = {
         {
             creep.memory.Counter = 0;
         }
+        if (creep.memory.roomName == targetRoomName && creep.room.name != targetRoomName)        {        creep.moveTo(targetPos);        } else {
+            if (creep.memory.roomName == targetRoomName && creep.room.name == targetRoomName && creep.memory.Counter == 0)        {  if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0], {reusePath: 5});
+            }
+            } else {
         if( creep.carry.energy < creep.carryCapacity && creep.memory.Counter == 0 ) {
             if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+                creep.moveTo(sources[1], {reusePath: 5});
             } 
         } else
         if(targets.length > 0 && creep.memory.Counter > 0) {
+            //console.log(targets.length);
             if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0]);
+                creep.moveTo(targets[0], {reusePath: 5});
             }
         } else
         {
@@ -45,7 +55,7 @@ var roleHarvester = {
                 creep.moveTo(targets[0]);
             }
         }
-        
+        }}
     }
 };
 
