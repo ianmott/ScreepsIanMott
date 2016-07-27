@@ -33,18 +33,18 @@ var targetPos = new RoomPosition(x,y, targetRoomName);
         }
         if (creep.memory.roomName == targetRoomName && creep.room.name != targetRoomName)        {        creep.moveTo(targetPos);        } else {
             if (creep.memory.roomName == targetRoomName && creep.room.name == targetRoomName && creep.memory.Counter == 0)        {  if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {reusePath: 5});
+                creep.moveTo(sources[0], {reusePath: 10});
             }
             } else {
         if( creep.carry.energy < creep.carryCapacity && creep.memory.Counter == 0 ) {
             if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1], {reusePath: 5});
+                creep.moveTo(sources[1], {reusePath: 10});
             } 
         } else
         if(targets.length > 0 && creep.memory.Counter > 0) {
             //console.log(targets.length);
             if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0], {reusePath: 5});
+                creep.moveTo(targets[0], {reusePath: 10});
             }
         } else
         {

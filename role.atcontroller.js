@@ -18,8 +18,8 @@ var targetPos = new RoomPosition(12,11, targetRoomName);
         //} else
         
         creep.claimController(creep.room.controller);
-        if(creep.moveTo(creep.room.controller, {reusePath: 5})) {
-            creep.moveTo(creep.room.controller, {reusePath: 5});
+        if(creep.moveTo(creep.room.controller, {reusePath: 10})) {
+            creep.moveTo(creep.room.controller, {reusePath: 10});
             creep.claimController(creep.room.controller);
         } 
     }

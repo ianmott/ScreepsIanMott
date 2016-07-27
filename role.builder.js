@@ -20,7 +20,7 @@ var targetPos = new RoomPosition(12,11, targetRoomName);
             
             if (energy.length && creep.carry.energy != creep.carryCapacity) {
                 //console.log('found ' + energy[t].energy + ' energy at ', energy[t].pos);
-                if(creep.moveTo(energy[t], {reusePath: 5}) == ERR_NOT_IN_RANGE) {
+                if(creep.moveTo(energy[t], {reusePath: 10}) == ERR_NOT_IN_RANGE) {
                 creep.pickup(energy[t]);
             } else creep.pickup(energy[t]);
 } else
@@ -29,15 +29,15 @@ var targetPos = new RoomPosition(12,11, targetRoomName);
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
                 if(targets.length) {
                     if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {reusePath: 5});
+                        creep.moveTo(targets[0], {reusePath: 10});
                     }
                 }
             }
             else  if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE && sources[0].energy > 0) {
-                    creep.moveTo(sources[0], {reusePath: 5});
+                    creep.moveTo(sources[0], {reusePath: 10});
             }else if(creep.memory.building) {
                 if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(creep.room.controller, {reusePath: 5});
+                    creep.moveTo(creep.room.controller, {reusePath: 10});
                 }
             }
         }

@@ -7,7 +7,7 @@ var roletHarvester = {
             if (sources.length == 1) targetnum = 0;
         if(creep.carry.energy < creep.carryCapacity && sources[targetnum].energy > 0) {
             if(creep.harvest(sources[targetnum]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[targetnum], {reusePath: 5});
+                creep.moveTo(sources[targetnum], {reusePath: 10});
             } 
         }
         else {
@@ -20,7 +20,7 @@ var roletHarvester = {
             });
             if(targets.length > 0 && targets[0].energy < targets[0].energyCapacity) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {reusePath: 5});
+                    creep.moveTo(targets[0], {reusePath: 10});
                 }
             }else{
                 var targets = creep.room.find(FIND_STRUCTURES, {
@@ -30,12 +30,12 @@ var roletHarvester = {
                 });
                 if(targets.length > 0) {
                     if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {reusePath: 5});
+                        creep.moveTo(targets[0], {reusePath: 10});
                     }
                 }  else
                 {
                     if(creep.transfer(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(creep.room.storage, {reusePath: 5});
+                        creep.moveTo(creep.room.storage, {reusePath: 10});
                     }
                     
                 }

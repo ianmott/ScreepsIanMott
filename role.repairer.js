@@ -26,7 +26,7 @@ var sources = creep.room.find(FIND_SOURCES);
                 // try to repair it, if it is out of range
                 if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                     // move towards it
-                    creep.moveTo(structure, {reusePath: 5});
+                    creep.moveTo(structure, {reusePath: 10});
                 }
             }
             // if we can't fine one
@@ -35,7 +35,7 @@ var sources = creep.room.find(FIND_SOURCES);
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
                 if(targets.length) {
                     if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {reusePath: 5});
+                        creep.moveTo(targets[0], {reusePath: 10});
                     }
                 }
             }

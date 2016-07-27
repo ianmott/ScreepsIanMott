@@ -27,7 +27,7 @@ var targetPos = new RoomPosition(12,11, targetRoomName);
             //if (energy.length > 0) t =1;
             if (energy.length) {
                 //console.log('found ' + energy[t].energy + ' energy at ', energy[t].pos);
-                if(creep.moveTo(energy[t], {reusePath: 5}) == ERR_NOT_IN_RANGE) {
+                if(creep.moveTo(energy[t], {reusePath: 10}) == ERR_NOT_IN_RANGE) {
                 creep.pickup(energy[t]);
             }else
                 creep.pickup(energy[t]);
@@ -45,12 +45,12 @@ var targetPos = new RoomPosition(12,11, targetRoomName);
             if (targets.length > 0){
                 //console.log(targets[0]);
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {reusePath: 5});
+                    creep.moveTo(targets[0], {reusePath: 10});
                 }
             } else
             {
                 if(creep.transfer(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(creep.room.storage, {reusePath: 5});
+                    creep.moveTo(creep.room.storage, {reusePath: 10});
                 }
                 
             }
