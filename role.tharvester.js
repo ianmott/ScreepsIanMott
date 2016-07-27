@@ -11,25 +11,33 @@ var roletHarvester = {
             } 
         }
         else {
+            //var t  = 1;
+            //if (targets.length == 1) t = 0;
             var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity ;
                     }
             });
-            if(targets.length > 0 && targets[0].energy >0) {
+            if(targets.length > 0 && targets[0].energy < targets[0].energyCapacity) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {reusePath: 5});
                 }
             }else{
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_STORAGE)  ;
+                        return (structure.structureType == STRUCTURE_EXTENSION ) && structure.energy < structure.energyCapacity   ;
                     }
                 });
                 if(targets.length > 0) {
                     if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(targets[0], {reusePath: 5});
                     }
+                }  else
+                {
+                    if(creep.transfer(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(creep.room.storage, {reusePath: 5});
+                    }
+                    
                 }
             }
         }

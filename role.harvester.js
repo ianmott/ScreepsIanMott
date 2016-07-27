@@ -11,14 +11,17 @@ var roleHarvester = {
         var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                 //    return (structure.structureType == STRUCTURE_TOWER
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_CONTAINER 
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_STORAGE
                             ) && structure.energy < structure.energyCapacity ;
                 }
             });
         var sources = creep.room.find(FIND_SOURCES);
         
 var targetRoomName = "W44S37";
-var targetPos = new RoomPosition(12,11, targetRoomName);
+
+var x =Game.rooms[targetRoomName].controller.pos.x;
+var y =Game.rooms[targetRoomName].controller.pos.y;
+var targetPos = new RoomPosition(x,y, targetRoomName);
         
         if (sources[0].energy == 0)
         {
