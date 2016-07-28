@@ -4,7 +4,7 @@
  *
  * You can import it from another modules like this:
  * var mod = require('role.guard');
- * mod.thing == 'a thing'; // true
+ * mod.thing === 'a thing'; // true
  */
 
 
@@ -21,7 +21,7 @@ var roleguard = {
                     creep.attack(targets[0]);
                 }
             }else {
-            if(creep.moveTo(creep.room.controller) != ERR_NOT_IN_RANGE) {
+            if(creep.moveTo(creep.room.controller) !== ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller);
             }
         }

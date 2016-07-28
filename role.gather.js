@@ -6,7 +6,7 @@ var roleGather = {
             var t = 0;
         var sources = creep.room.find(FIND_SOURCES);
             if (sources.length > 0) t =1;
-        if(creep.harvest(sources[t]) == ERR_NOT_IN_RANGE) {
+        if(creep.harvest(sources[t]) === ERR_NOT_IN_RANGE) {
             creep.moveTo(sources[t], {reusePath: 10});
         } 
     }

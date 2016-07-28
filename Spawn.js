@@ -103,7 +103,7 @@ var Spawn = {
             Types[TWeights[9]][0] = 'haul';         // Type Name   
             Types[TWeights[9]][1] = 1;  //   Type Min 
             Types[TWeights[9]][4] = 949;  // Cost
-            Types[TWeights[9]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'haul' && creep.memory.roomName == RoomName).length;  // Type Current
+            Types[TWeights[9]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'haul' && creep.memory.roomName === RoomName).length;  // Type Current
             Types[TWeights[9]][3] = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
         
         for (j=SpawnRange.length; j > 0 && !toggle;j--) {
@@ -116,15 +116,15 @@ var Spawn = {
         toggle = false;
         
         
-        if (Game.rooms[RoomName].energyCapacityAvailable < Types[TWeights[0]][4] || (Types[TWeights[0]][2] <2 && Types[TWeights[9]][2] ==0) ){
+        if (Game.rooms[RoomName].energyCapacityAvailable < Types[TWeights[0]][4] || (Types[TWeights[0]][2] <2 && Types[TWeights[9]][2] ===0) ){
             SpawnRangeResult = SpawnRange[RangeID];
             Parts = PartsA[RangeID];
         }
         
-        if(Types[TWeights[0]][2] ==0 && Types[TWeights[9]][2] ==0) {
+        if(Types[TWeights[0]][2] ===0 && Types[TWeights[9]][2] ===0) {
             RangeID = 0;
         }else {
-            if(Types[TWeights[0]][2] ==1 && Types[TWeights[9]][2] ==0 && Game.rooms[RoomName].energyAvailable > SpawnRange[1]){
+            if(Types[TWeights[0]][2] ===1 && Types[TWeights[9]][2] ===0 && Game.rooms[RoomName].energyAvailable > SpawnRange[1]){
                 RangeID = 1;
             } else {
                 RangeID = 0;
@@ -140,7 +140,7 @@ var Spawn = {
                 Parts = Types[i][3];
             } 
             if (RangeID < 3 && SpawnRangeResult < SpawnRange[3]) { 
-                if (i ==0 || i==3 || i==5 || i==6 || i ==4)
+                if (i ===0 || i===3 || i===5 || i===6 || i ===4)
                     Types[i][1] = 1; 
                 else 
                     Types[i][1] = 0;
@@ -153,7 +153,7 @@ var Spawn = {
             }
         }
         
-        if (Game.time%10<1){ 
+        if (Game.time%10===0){ 
             var stringbuilder = ' RC: '+Game.rooms[RoomName].controller.progress+'/'+Game.rooms[RoomName].controller.progressTotal+
                                 ' ECap: '+Game.rooms[RoomName].energyCapacityAvailable+' E: '+Game.rooms[RoomName].energyAvailable;
             for (i = 0; i< NumofTypes;i++) {
@@ -165,7 +165,7 @@ var Spawn = {
             console.log(stringbuilder);
         }
     
-        if (Game.time%100==0){ 
+        if (Game.time%100===0){ 
             for (let name in Memory.creeps) { 
                 if (!Game.creeps[name]) { 
                     console.log('deleting '+name+' role '+Memory.creeps[name].role); 

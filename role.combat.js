@@ -4,13 +4,13 @@
  *
  * You can import it from another modules like this:
  * var mod = require('role.guard');
- * mod.thing == 'a thing'; // true
+ * mod.thing === 'a thing'; // true
  */
 
 
 var roleguard = {
     run: function(creep) {
-        if (creep.memory.subtype == 'guard'){
+        if (creep.memory.subtype === 'guard'){
             var targets = creep.room.find(Game.HOSTILE_CREEPS, {
                     filter: (creep) => {
                         return (creep.hits < creep.hitsMax);
@@ -27,7 +27,7 @@ var roleguard = {
                 }
             }
         }
-        if (creep.memory.subtype == 'rangedguard'){
+        if (creep.memory.subtype === 'rangedguard'){
             var targets = creep.room.find(Game.HOSTILE_CREEPS, {
                 filter: (creep) => {
                     return (creep.hits < creep.hitsMax);
@@ -40,7 +40,7 @@ var roleguard = {
                 }
             }
         }
-        if (creep.memory.subtype == 'atcontroller'){
+        if (creep.memory.subtype === 'atcontroller'){
             var targetRoomName = creep.memory.targetRoomName;
             var targetPos = new RoomPosition(12,11, targetRoomName);
             //if (creep.room.roomName != targetRoomName){
