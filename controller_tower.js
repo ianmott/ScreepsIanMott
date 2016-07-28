@@ -18,11 +18,25 @@ module.exports.run = function() {
             if (_.some(targets)) { _.forEach(towers, t => t.attack(targets[0])); }
             else {
                 targets = _.sortBy(room.find(FIND_MY_CREEPS, { filter: s => s.hits < s.hitsMax }), s => s.hits);
-                if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().heal(targets.shift()); } }
+                if (_.some(targets)) { 
+                    while (_.some(towers) && _.some(targets)) { 
+                        towers.shift().heal(targets.shift()); 
+                    } 
+                }
                 else if (_.some(towers)) {
                     targets = _.sortBy(room.find(FIND_MY_STRUCTURES, { filter: s => s.CONTROLLER_RESERVE < s.CONTROLLER_RESERVE_MAX }), s => s.CONTROLLER_RESERVE);}
-                    if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().upgradeController(targets.shift()); } }
-                    else if (_.some(towers) && towers[0].energy > 600 && _.filter(Game.creeps, (creep) => creep.memory.role == 'tharvester').length >0) { targets = _.sortBy(room.find(FIND_STRUCTURES, { filter: s => should.tower.repair(s) }), s => s.hits);  if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { towers.shift().repair(targets.shift()); } }}
+                    if (_.some(targets)) { 
+                        while (_.some(towers) && _.some(targets)) { 
+                            towers.shift().upgradeController(targets.shift()); 
+                        } 
+                    }
+                    else if (_.some(towers) && towers[0].energy > 600 && _.filter(Game.creeps, (creep) => creep.memory.role == 'tharvester').length >0) { 
+                            targets = _.sortBy(room.find(FIND_STRUCTURES, { filter: s => should.tower.repair(s) }), s => s.hits);  
+                            if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { 
+                                towers.shift().repair(targets.shift()); 
+                            } 
+                        }
+                    }
                 //}
             }
         }

@@ -61,7 +61,7 @@ var Spawn = {
         TWeights[4] = 5;
         Types[TWeights[4]] = new Array(numofFields); 
             Types[TWeights[4]][0] = 'builder';      // Type Name   
-            Types[TWeights[4]][1] = 1;  //   Type Min 
+            Types[TWeights[4]][1] = 0;  //   Type Min 
             Types[TWeights[4]][4] = 949;  // Cost
             Types[TWeights[4]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.roomName == RoomName).length;     // Type Current 
             Types[TWeights[4]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //  Parts    
@@ -140,7 +140,7 @@ var Spawn = {
                 Parts = Types[i][3];
             } 
             if (RangeID < 3 && SpawnRangeResult < SpawnRange[3]) { 
-                if (i ==0 || i==3 || i==5 || i==6)
+                if (i ==0 || i==3 || i==5 || i==6 || i ==4)
                     Types[i][1] = 1; 
                 else 
                     Types[i][1] = 0;
