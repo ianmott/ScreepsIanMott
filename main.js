@@ -1,23 +1,19 @@
 /** @module main */
 
-var roleHarvester = require('role.harvester');
-var roletHarvester = require('role.tharvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-var rolerepairer = require('role.repairer');
-var roleguard = require('role.guard');
-var rolerangedguard = require('role.rangedguard');
-var roleatcontroller = require('role.atcontroller');
-var rolegather = require('role.gather');
-var rolehaul = require('role.haul');
+const roleHarvester = require('role.harvester');
+const roletHarvester = require('role.tharvester');
+const roleUpgrader = require('role.upgrader');
+const roleBuilder = require('role.builder');
+const rolerepairer = require('role.repairer');
+const roleguard = require('role.guard');
+const rolerangedguard = require('role.rangedguard');
+const roleatcontroller = require('role.atcontroller');
+const rolegather = require('role.gather');
+const rolehaul = require('role.haul');
 
 require('./ext_StructureTower');
-let controller_tower = require('./controller_tower');
-var SpawnSystem = require('Spawn');
-var RoomNames = new Array(2);
-var RoomNum = RoomNames.length;
-RoomNames[0] = 'W44S38';
-RoomNames[1] = 'W44S37';
+const controller_tower = require('./controller_tower');
+const SpawnSystem = require('Spawn');
 
 module.exports.loop = function() {
     //for (let name in Memory.creeps) { if (Game.creeps[name]) { Game.creeps[name].memory.roomName = RoomNames[0]; } }
