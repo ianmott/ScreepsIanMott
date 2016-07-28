@@ -2,6 +2,7 @@
 
 const roles = require('roles');
 
+const SpawnSystem = require('Spawn');
 module.exports.loop = function() {
     //for (let name in Memory.creeps) { if (Game.creeps[name]) { Game.creeps[name].memory.roomName = RoomNames[0]; } }
     //for (i=0;i<RoomNum;i++) { SpawnSystem.run(RoomNames[i]); }

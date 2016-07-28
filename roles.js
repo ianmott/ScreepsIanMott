@@ -20,7 +20,6 @@ const rolecombat = require('role.combat');
 
 require('./ext_StructureTower');
 const controller_tower = require('./controller_tower');
-const SpawnSystem = require('Spawn');
 
 module.exports.run = function() {
     

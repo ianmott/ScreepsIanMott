@@ -139,7 +139,7 @@ var Spawn = {
             if (Game.rooms[RoomName].energyCapacityAvailable > Types[TWeights[0]][4]){
                 Parts = Types[i][3];
             } 
-            if (RangeID < 3) { 
+            if (RangeID < 3 && SpawnRangeResult < SpawnRange[3]) { 
                 if (i ==0 || i==3 || i==5 || i==6)
                     Types[i][1] = 1; 
                 else 
