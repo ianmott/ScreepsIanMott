@@ -9,6 +9,6 @@ module.exports.tower = {};
  */
 module.exports.tower.repair = function(target) {
     let repPower = TOWER_POWER_REPAIR;
-    let hitsLimit = target instanceof StructureRoad ? 4500 : 20000;
+    let hitsLimit = target instanceof StructureRoad ? 5500 : 25000;
     return (target.hits <= target.hitsMax - repPower || target.hits < target.hitsMax / 2) && target.hits < hitsLimit;
 };
