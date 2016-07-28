@@ -37,9 +37,9 @@ module.exports.run = function() {
         
         if (creep.memory.role == 'combat') { rolecombat.run(creep);}
         
-        if (creep.memory.role == 'guard') { roleguard.run(creep); }
-        if (creep.memory.role == 'rangedguard') { rolerangedguard.run(creep);}
-        if (creep.memory.role == 'atcontroller') { roleatcontroller.run(creep);}
+        //if (creep.memory.role == 'guard') { roleguard.run(creep); }
+        //if (creep.memory.role == 'rangedguard') { rolerangedguard.run(creep);}
+        //if (creep.memory.role == 'atcontroller') { roleatcontroller.run(creep);}
         
     }
 };

@@ -39,7 +39,7 @@ var Spawn = {
             Types[TWeights[1]][0] = 'guard';     // Type Name      
             Types[TWeights[1]][1] = 0;  //   Type Min 
             Types[TWeights[1]][4] = 1049; // Cost
-            Types[TWeights[1]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'guard' && creep.memory.roomName == RoomName).length;        // Type Current
+            Types[TWeights[1]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'combat' && creep.memory.subrole == 'guard' && creep.memory.roomName == RoomName).length;        // Type Current
             Types[TWeights[1]][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,ATTACK,MOVE,MOVE]; //  Parts    
         
         TWeights[2] = 3;
@@ -71,7 +71,7 @@ var Spawn = {
             Types[TWeights[5]][0] = 'rangedguard';  // Type Name   
             Types[TWeights[5]][1] = 0;  //   Type Min 
             Types[TWeights[5]][4] = 1049; // Cost
-            Types[TWeights[5]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'rangedguard' && creep.memory.roomName == RoomName).length;  // Type Current
+            Types[TWeights[5]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'combat' && creep.memory.subrole == 'rangedguard' && creep.memory.roomName == RoomName).length;  // Type Current
             Types[TWeights[5]][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK]; //  Parts    
         
         TWeights[6] = 4;
@@ -87,7 +87,7 @@ var Spawn = {
             Types[TWeights[7]][0] = 'atcontroller'; // Type Name   
             Types[TWeights[7]][1] = 0;  //   Type Min 
             Types[TWeights[7]][4] = 849;  // Cost
-            Types[TWeights[7]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'atcontroller' && creep.memory.roomName == RoomName).length;  // Type Current
+            Types[TWeights[7]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'combat' && creep.memory.subrole == 'atcontroller' && creep.memory.roomName == RoomName).length;  // Type Current
             Types[TWeights[7]][3] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
         
         TWeights[8] = 1;
