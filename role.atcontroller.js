@@ -10,7 +10,7 @@
 var atcontroller = {
     run: function(creep) {
         var targetRoomName = "W44S37";
-var targetPos = new RoomPosition(12,11, targetRoomName);
+        var targetPos = new RoomPosition(12,11, targetRoomName);
         //if (creep.room.roomName != targetRoomName && false){
         //    if (creep.moveTo(targetPos)){
         //        creep.moveTo(targetPos);
