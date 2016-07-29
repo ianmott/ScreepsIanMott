@@ -1,7 +1,7 @@
 
 var Spawn = {
 
-    run: function(RoomName, DebugMode) {
+    run: function(RoomName, DebugMode, TargetRoom) {
         const spawn = Game.rooms[RoomName].find(FIND_MY_SPAWNS)[0];
         var totalCreeps = 0; 
         var maxCreeps = 0;
@@ -111,20 +111,20 @@ var Spawn = {
         TWeights[9] = 9;
         Types[TWeights[9]] = new Array(numofFields); 
             Types[TWeights[9]][0] = 'rh';         // Type Name   
-            Types[TWeights[9]][1] = 0;  //   Type Min 
+            Types[TWeights[9]][1] = 1;  //   Type Min 
             Types[TWeights[9]][4] = 949;  // Cost
             Types[TWeights[9]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'rh' && creep.memory.roomName === RoomName).length;  // Type Current
             Types[TWeights[9]][3] = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
-            Types[TWeights[9]][5] = '';
+            Types[TWeights[9]][5] = 'remote';
 
         TWeights[10] = 10;
         Types[TWeights[10]] = new Array(numofFields); 
             Types[TWeights[10]][0] = 'rg';         // Type Name   
-            Types[TWeights[10]][1] = 0;  //   Type Min 
+            Types[TWeights[10]][1] = 1;  //   Type Min 
             Types[TWeights[10]][4] = 949;  // Cost
             Types[TWeights[10]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'rg' && creep.memory.roomName === RoomName).length;  // Type Current
             Types[TWeights[10]][3] = [WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
-            Types[TWeights[10]][5] = '';
+            Types[TWeights[10]][5] = 'remote';
             
         for (j=SpawnRange.length; j > 0 && !toggle;j--) {
             if (SpawnRange[j] < Game.rooms[RoomName].energyCapacityAvailable){
@@ -169,7 +169,7 @@ var Spawn = {
             if (Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult && !toggle){         
                 var newName = spawn.createCreep(Parts, undefined, {role: Types[i][0]});
                 if (Game.creeps[newName]){ Game.creeps[newName].memory.roomName = RoomName;}
-                if (Game.creeps[newName] && Types[i][5] !== ''){ Game.creeps[newName].memory.subrole = Types[i][5]; }
+                if (Game.creeps[newName] && Types[i][5] !== ''){ Game.creeps[newName].memory.subrole = Types[i][5]; Game.creeps[newName].memory.targetRoomName = TargetRoom;}
                 if (DebugMode) console.log('SRange '+SpawnRangeResult+' Spawning new '+Types[i][0]+': ' + newName + ' Parts: '+Parts+' Room: '+RoomName);
                 toggle = true;
             }

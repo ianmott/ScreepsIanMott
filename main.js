@@ -15,7 +15,7 @@ const DebugMode = true;
 module.exports.loop = function() {
     //for (let name in Memory.creeps) { if (Game.creeps[name]) { Game.creeps[name].memory.roomName = RoomNames[0]; } }
     //for (i=0;i<RoomNum;i++) { SpawnSystem.run(RoomNames[i]); }
-    
+    const TargetRoom = 'W44S36';
     PathFinder.use(true);
     
     const rooms = Game.rooms;
@@ -23,7 +23,7 @@ module.exports.loop = function() {
         let room = Game.rooms[roomKey];
         let isMyRoom = (room.controller ? room.controller.my : 0);
         if (isMyRoom) {
-            SpawnSystem.run(room.name, DebugMode);
+            SpawnSystem.run(room.name, DebugMode, TargetRoom);
                 //return room.controller;
         }
     }
