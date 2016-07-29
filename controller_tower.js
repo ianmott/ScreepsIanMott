@@ -12,7 +12,9 @@ module.exports.run = function() {
         let room = Game.rooms[roomName];
 
         let targets = _.sortBy(room.find(FIND_HOSTILE_CREEPS), c => c.hits);
-        if (_.some(targets)) { _.forEach(towers, t => t.attack(targets[0])); }
+        if (_.some(targets)) { 
+            _.forEach(towers, t => t.attack(targets[0])); 
+        }
         else {
             let targets = _.sortBy(room.find(FIND_HOSTILE_CONSTRUCTION_SITES), c => c.progress);
             if (_.some(targets)) { _.forEach(towers, t => t.attack(targets[0])); }
@@ -29,6 +31,16 @@ module.exports.run = function() {
                         while (_.some(towers) && _.some(targets)) { 
                             towers.shift().upgradeController(targets.shift()); 
                         } 
+                    }
+                    else if (towers.length > 1){
+                        if (_.some(towers) && towers[1].energy > 600 && towers[0].energy > 600 && _.filter(Game.creeps, (creep) => creep.memory.role === 'tharvester').length >0) { 
+                            targets = _.sortBy(room.find(FIND_STRUCTURES, { filter: s => should.tower.repair(s) }), s => s.hits);  
+                            if (_.some(targets)) { 
+                                while (_.some(towers) && _.some(targets)) { 
+                                    towers.shift().repair(targets.shift()); 
+                                } 
+                            }
+                        }
                     }
                     else if (_.some(towers) && towers[0].energy > 600 && _.filter(Game.creeps, (creep) => creep.memory.role === 'tharvester').length >0) { 
                             targets = _.sortBy(room.find(FIND_STRUCTURES, { filter: s => should.tower.repair(s) }), s => s.hits);  
