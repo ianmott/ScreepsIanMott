@@ -9,7 +9,7 @@ var Spawn = {
     	var SpawnRange = new Array(NumofSpawns);
     	var RangeID = 0;
     	var PartsA = new Array(NumofSpawns); 
-    	const NumofTypes = 9;
+    	const NumofTypes = 11;
     	const numofFields = 6;
     	var TWeights = new Array(NumofTypes);
     	var toggle = false;
@@ -107,6 +107,24 @@ var Spawn = {
             Types[TWeights[8]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'haul' && creep.memory.roomName === RoomName).length;  // Type Current
             Types[TWeights[8]][3] = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
             Types[TWeights[8]][5] = '';
+            
+        TWeights[9] = 9;
+        Types[TWeights[9]] = new Array(numofFields); 
+            Types[TWeights[9]][0] = 'rh';         // Type Name   
+            Types[TWeights[9]][1] = 0;  //   Type Min 
+            Types[TWeights[9]][4] = 949;  // Cost
+            Types[TWeights[9]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'rh' && creep.memory.roomName === RoomName).length;  // Type Current
+            Types[TWeights[9]][3] = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
+            Types[TWeights[9]][5] = '';
+
+        TWeights[10] = 10;
+        Types[TWeights[10]] = new Array(numofFields); 
+            Types[TWeights[10]][0] = 'rg';         // Type Name   
+            Types[TWeights[10]][1] = 0;  //   Type Min 
+            Types[TWeights[10]][4] = 949;  // Cost
+            Types[TWeights[10]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'rg' && creep.memory.roomName === RoomName).length;  // Type Current
+            Types[TWeights[10]][3] = [WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
+            Types[TWeights[10]][5] = '';
             
         for (j=SpawnRange.length; j > 0 && !toggle;j--) {
             if (SpawnRange[j] < Game.rooms[RoomName].energyCapacityAvailable){

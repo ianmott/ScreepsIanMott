@@ -9,8 +9,8 @@
 
 
 var roleguard = {
-    run: function(creep) {
-        if (creep.memory.subtype === 'guard'){
+    run: function(creep,subtype) {
+        if (subtype === 'guard'){
             var targets = creep.room.find(Game.HOSTILE_CREEPS, {
                     filter: (creep) => {
                         return (creep.hits < creep.hitsMax);
@@ -27,7 +27,7 @@ var roleguard = {
                 }
             }
         }
-        if (creep.memory.subtype === 'rangedguard'){
+        if (subtype === 'rangedguard'){
             var targets = creep.room.find(Game.HOSTILE_CREEPS, {
                 filter: (creep) => {
                     return (creep.hits < creep.hitsMax);
@@ -40,14 +40,14 @@ var roleguard = {
                 }
             }
         }
-        if (creep.memory.subtype === 'atcontroller'){
+        if (subtype === 'atcontroller'){
             var targetRoomName = creep.memory.targetRoomName;
-            var targetPos = new RoomPosition(12,11, targetRoomName);
-            //if (creep.room.roomName != targetRoomName){
-            //    if (creep.moveTo(targetPos)){
-            //        creep.moveTo(targetPos);
-            //    }
-            //} else
+            if (creep.room.roomName != targetRoomName){
+                var targetPos = Game.rooms[roomname].findExitTo(targetRoomName);
+                if (creep.moveTo(targetPos)){
+                    creep.moveTo(targetPos);
+                }
+            } else
             {
                 creep.claimController(creep.room.controller);
                 if(creep.moveTo(creep.room.controller, {reusePath: 10})) {

@@ -6,7 +6,7 @@ const rolerepairer = require('role.repairer');
 const rolegather = require('role.gather');
 const rolehaul = require('role.haul');
 const rolecombat = require('role.combat');
-
+const roleremote = require('role.remote');
 require('./ext_StructureTower');
 const controller_tower = require('./controller_tower');
 
@@ -38,8 +38,8 @@ module.exports.loop = function() {
         if (creep.memory.role === 'repairer') { rolerepairer.run(creep); }
         if (creep.memory.role === 'gather') { rolegather.run(creep);}
         if (creep.memory.role === 'haul') { rolehaul.run(creep);}
-        
-        if (creep.memory.role === 'combat') { rolecombat.run(creep);}
+        if (creep.memory.role === 'rh' || creep.memory.role === 'rg') { roleremote.run(creep,creep.memory.role);}
+        if (creep.memory.role === 'combat') { rolecombat.run(creep, creep.memory.subtype);}
         
     }
     //console.log(Game.time);
