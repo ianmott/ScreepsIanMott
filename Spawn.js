@@ -9,7 +9,7 @@ var Spawn = {
     	var SpawnRange = new Array(NumofSpawns);
     	var RangeID = 0;
     	var PartsA = new Array(NumofSpawns); 
-    	const NumofTypes = 10;
+    	const NumofTypes = 9;
     	const numofFields = 6;
     	var TWeights = new Array(NumofTypes);
     	var toggle = false;
@@ -35,7 +35,7 @@ var Spawn = {
             Types[TWeights[0]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE];  //  Parts    
             Types[TWeights[0]][5] = '';
             
-        TWeights[1] = 8; // weight 
+        TWeights[1] = 7; // weight 
         Types[TWeights[1]] = new Array(numofFields); 
             Types[TWeights[1]][0] = 'combat';     // Type Name      
             Types[TWeights[1]][1] = 0;  //   Type Min 
@@ -53,7 +53,7 @@ var Spawn = {
             Types[TWeights[2]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //  Parts    
             Types[TWeights[2]][5] = '';
             
-        TWeights[3] = 6;
+        TWeights[3] = 5;
         Types[TWeights[3]] = new Array(numofFields); 
             Types[TWeights[3]][0] = 'repairer';     // Type Name   
             Types[TWeights[3]][1] = 1;  //   Type Min 
@@ -62,59 +62,51 @@ var Spawn = {
             Types[TWeights[3]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //  Parts    
             Types[TWeights[3]][5] = '';
             
-        TWeights[4] = 5;
+            
+        TWeights[4] = 6;
         Types[TWeights[4]] = new Array(numofFields); 
-            Types[TWeights[4]][0] = 'builder';      // Type Name   
+            Types[TWeights[4]][0] = 'combat';  // Type Name   
             Types[TWeights[4]][1] = 0;  //   Type Min 
-            Types[TWeights[4]][4] = 949;  // Cost
-            Types[TWeights[4]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder' && creep.memory.roomName === RoomName).length;     // Type Current 
-            Types[TWeights[4]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //  Parts    
-            Types[TWeights[4]][5] = '';
+            Types[TWeights[4]][4] = 1049; // Cost
+            Types[TWeights[4]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'combat' && creep.memory.subrole === 'rangedguard' && creep.memory.roomName === RoomName).length;  // Type Current
+            Types[TWeights[4]][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK]; //  Parts    
+            Types[TWeights[4]][5] = 'rangedguard';
             
-        TWeights[5] = 7;
+        TWeights[5] = 4;
         Types[TWeights[5]] = new Array(numofFields); 
-            Types[TWeights[5]][0] = 'combat';  // Type Name   
-            Types[TWeights[5]][1] = 0;  //   Type Min 
-            Types[TWeights[5]][4] = 1049; // Cost
-            Types[TWeights[5]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'combat' && creep.memory.subrole === 'rangedguard' && creep.memory.roomName === RoomName).length;  // Type Current
-            Types[TWeights[5]][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK]; //  Parts    
-            Types[TWeights[5]][5] = 'rangedguard';
+            Types[TWeights[5]][0] = 'tharvester';   // Type Name   
+            Types[TWeights[5]][1] = 1;  //   Type Min 
+            Types[TWeights[5]][4] = 949;  // Cost
+            Types[TWeights[5]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'tharvester' && creep.memory.roomName === RoomName).length;   // Type Current
+            Types[TWeights[5]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //  Parts    
+            Types[TWeights[5]][5] = '';
             
-        TWeights[6] = 4;
+        TWeights[6] = 8;
         Types[TWeights[6]] = new Array(numofFields); 
-            Types[TWeights[6]][0] = 'tharvester';   // Type Name   
-            Types[TWeights[6]][1] = 1;  //   Type Min 
-            Types[TWeights[6]][4] = 949;  // Cost
-            Types[TWeights[6]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'tharvester' && creep.memory.roomName === RoomName).length;   // Type Current
-            Types[TWeights[6]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //  Parts    
-            Types[TWeights[6]][5] = '';
+            Types[TWeights[6]][0] = 'combat'; // Type Name   
+            Types[TWeights[6]][1] = 0;  //   Type Min 
+            Types[TWeights[6]][4] = 849;  // Cost
+            Types[TWeights[6]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'combat' && creep.memory.subrole === 'atcontroller' && creep.memory.roomName === RoomName).length;  // Type Current
+            Types[TWeights[6]][3] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
+            Types[TWeights[6]][5] = 'atcontroller';
             
-        TWeights[7] = 9;
+        TWeights[7] = 1;
         Types[TWeights[7]] = new Array(numofFields); 
-            Types[TWeights[7]][0] = 'combat'; // Type Name   
-            Types[TWeights[7]][1] = 0;  //   Type Min 
+            Types[TWeights[7]][0] = 'gather';       // Type Name   
+            Types[TWeights[7]][1] = 1;  //   Type Min 
             Types[TWeights[7]][4] = 849;  // Cost
-            Types[TWeights[7]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'combat' && creep.memory.subrole === 'atcontroller' && creep.memory.roomName === RoomName).length;  // Type Current
-            Types[TWeights[7]][3] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
-            Types[TWeights[7]][5] = 'atcontroller';
+            Types[TWeights[7]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'gather' && creep.memory.roomName === RoomName).length;   // Type Current
+            Types[TWeights[7]][3] = [WORK,WORK,WORK,WORK,WORK,WORK,MOVE]; //  Parts    
+            Types[TWeights[7]][5] = '';
             
-        TWeights[8] = 1;
+        TWeights[8] = 2;
         Types[TWeights[8]] = new Array(numofFields); 
-            Types[TWeights[8]][0] = 'gather';       // Type Name   
+            Types[TWeights[8]][0] = 'haul';         // Type Name   
             Types[TWeights[8]][1] = 1;  //   Type Min 
             Types[TWeights[8]][4] = 949;  // Cost
-            Types[TWeights[8]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'gather' && creep.memory.roomName === RoomName).length;   // Type Current
-            Types[TWeights[8]][3] = [WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE]; //  Parts    
+            Types[TWeights[8]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'haul' && creep.memory.roomName === RoomName).length;  // Type Current
+            Types[TWeights[8]][3] = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
             Types[TWeights[8]][5] = '';
-            
-        TWeights[9] = 2;
-        Types[TWeights[9]] = new Array(numofFields); 
-            Types[TWeights[9]][0] = 'haul';         // Type Name   
-            Types[TWeights[9]][1] = 1;  //   Type Min 
-            Types[TWeights[9]][4] = 949;  // Cost
-            Types[TWeights[9]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'haul' && creep.memory.roomName === RoomName).length;  // Type Current
-            Types[TWeights[9]][3] = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
-            Types[TWeights[9]][5] = '';
             
         for (j=SpawnRange.length; j > 0 && !toggle;j--) {
             if (SpawnRange[j] < Game.rooms[RoomName].energyCapacityAvailable){
@@ -128,17 +120,17 @@ var Spawn = {
         
 
         
-        if(Types[TWeights[0]][2] ===0 || ( Types[TWeights[9]][2] ===0 && Types[TWeights[8]][2] ===0 ) ) {
+        if(Types[TWeights[0]][2] ===0 || ( Types[TWeights[8]][2] ===0 && Types[TWeights[7]][2] ===0 ) ) {
             RangeID = 0;
         }else {
-            if(Types[TWeights[0]][2] ===1 && Types[TWeights[9]][2] ===0 && Game.rooms[RoomName].energyAvailable > SpawnRange[1]){
+            if(Types[TWeights[0]][2] ===1 && Types[TWeights[8]][2] ===0 && Game.rooms[RoomName].energyAvailable > SpawnRange[1]){
                 RangeID = 1;
             } else {
                 RangeID = 0;
             }
         }
         //console.log(RangeID);
-        if (Game.rooms[RoomName].energyCapacityAvailable < Types[TWeights[0]][4] || (Types[TWeights[0]][2] <2 && Types[TWeights[9]][2] ===0) ){
+        if (Game.rooms[RoomName].energyCapacityAvailable < Types[TWeights[0]][4] || (Types[TWeights[0]][2] <2 && Types[TWeights[8]][2] ===0) ){
             SpawnRangeResult = SpawnRange[RangeID];
             Parts = PartsA[RangeID];
         }
@@ -151,7 +143,7 @@ var Spawn = {
                 Parts = Types[i][3];
             } 
             if (RangeID < 3 && SpawnRangeResult < SpawnRange[3]) { 
-                if (i ===TWeights[0] || i===TWeights[6] || i===TWeights[3] || i===TWeights[2] )
+                if (i ===TWeights[0] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2] )
                     Types[i][1] = 1; 
                 else 
                     Types[i][1] = 0;

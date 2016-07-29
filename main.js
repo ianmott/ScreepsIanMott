@@ -2,7 +2,6 @@
 const roleHarvester = require('role.harvester');
 const roletHarvester = require('role.tharvester');
 const roleUpgrader = require('role.upgrader');
-const roleBuilder = require('role.builder');
 const rolerepairer = require('role.repairer');
 const rolegather = require('role.gather');
 const rolehaul = require('role.haul');
@@ -36,7 +35,6 @@ module.exports.loop = function() {
         if (creep.memory.role === 'harvester') { roleHarvester.run(creep); }
         if (creep.memory.role === 'tharvester') { roletHarvester.run(creep); }
         if (creep.memory.role === 'upgrader') { roleUpgrader.run(creep); }
-        if (creep.memory.role === 'builder') { roleBuilder.run(creep); }
         if (creep.memory.role === 'repairer') { rolerepairer.run(creep); }
         if (creep.memory.role === 'gather') { rolegather.run(creep);}
         if (creep.memory.role === 'haul') { rolehaul.run(creep);}
