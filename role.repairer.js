@@ -10,6 +10,27 @@ var sources = creep.room.find(FIND_SOURCES);
             creep.memory.building = true;
         }
 // if creep is supposed to repair something
+var energy = creep.pos.findInRange(
+                FIND_DROPPED_ENERGY,
+                15
+            );
+            var t = 0;
+            
+            if (energy.length && creep.carry.energy !== creep.carryCapacity) {
+                //console.log('found ' + energy[t].energy + ' energy at ', energy[t].pos);
+                if(creep.moveTo(energy[t], {reusePath: 10}) === ERR_NOT_IN_RANGE) {
+                creep.pickup(energy[t]);
+            } else creep.pickup(energy[t]);
+} else
+                if(creep.memory.building) {
+                var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+                if(targets.length) {
+                    if(creep.build(targets[0]) === ERR_NOT_IN_RANGE) {
+                        creep.moveTo(targets[0], {reusePath: 10});
+                    }
+                }
+            }
+            else
         if (creep.memory.building === true) {
             // find closest structure with less than max hits
             // Exclude walls because they have way too many max hits and would keep

@@ -2,15 +2,15 @@
 var Spawn = {
 
     run: function(RoomName) {
-        var spawn = Game.rooms[RoomName].find(FIND_MY_SPAWNS)[0];
+        const spawn = Game.rooms[RoomName].find(FIND_MY_SPAWNS)[0];
         var totalCreeps = 0; 
         var maxCreeps = 0;
-        var NumofSpawns = 5;
+        const NumofSpawns = 5;
     	var SpawnRange = new Array(NumofSpawns);
     	var RangeID = 0;
     	var PartsA = new Array(NumofSpawns); 
-    	var NumofTypes = 10;
-    	var numofFields = 5;
+    	const NumofTypes = 10;
+    	const numofFields = 5;
     	var TWeights = new Array(NumofTypes);
     	var toggle = false;
         var Types = new Array(NumofTypes);  
@@ -31,7 +31,7 @@ var Spawn = {
             Types[TWeights[0]][0] = 'harvester';    // Type Name   
             Types[TWeights[0]][1] = 2;  //   Type Min 
             Types[TWeights[0]][4] = 949;  // Cost
-            Types[TWeights[0]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.roomName == RoomName).length;    // Type Current 
+            Types[TWeights[0]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'harvester' && creep.memory.roomName === RoomName).length;    // Type Current 
             Types[TWeights[0]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE];  //  Parts    
         
         TWeights[1] = 8; // weight 
@@ -39,7 +39,7 @@ var Spawn = {
             Types[TWeights[1]][0] = 'guard';     // Type Name      
             Types[TWeights[1]][1] = 0;  //   Type Min 
             Types[TWeights[1]][4] = 1049; // Cost
-            Types[TWeights[1]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'combat' && creep.memory.subrole == 'guard' && creep.memory.roomName == RoomName).length;        // Type Current
+            Types[TWeights[1]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'combat' && creep.memory.subrole === 'guard' && creep.memory.roomName === RoomName).length;        // Type Current
             Types[TWeights[1]][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,ATTACK,MOVE,MOVE]; //  Parts    
         
         TWeights[2] = 3;
@@ -47,7 +47,7 @@ var Spawn = {
             Types[TWeights[2]][0] = 'upgrader';    // Type Name    
             Types[TWeights[2]][1] = 6;  //   Type Min 
             Types[TWeights[2]][4] = 949;  // Cost
-            Types[TWeights[2]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.roomName == RoomName).length;      // Type Current
+            Types[TWeights[2]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader' && creep.memory.roomName === RoomName).length;      // Type Current
             Types[TWeights[2]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //  Parts    
         
         TWeights[3] = 6;
@@ -55,15 +55,15 @@ var Spawn = {
             Types[TWeights[3]][0] = 'repairer';     // Type Name   
             Types[TWeights[3]][1] = 1;  //   Type Min 
             Types[TWeights[3]][4] = 949;  // Cost
-            Types[TWeights[3]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer' && creep.memory.roomName == RoomName).length;     // Type Current
+            Types[TWeights[3]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'repairer' && creep.memory.roomName === RoomName).length;     // Type Current
             Types[TWeights[3]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //  Parts    
         
         TWeights[4] = 5;
         Types[TWeights[4]] = new Array(numofFields); 
             Types[TWeights[4]][0] = 'builder';      // Type Name   
-            Types[TWeights[4]][1] = 0;  //   Type Min 
+            Types[TWeights[4]][1] = 1;  //   Type Min 
             Types[TWeights[4]][4] = 949;  // Cost
-            Types[TWeights[4]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.roomName == RoomName).length;     // Type Current 
+            Types[TWeights[4]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder' && creep.memory.roomName === RoomName).length;     // Type Current 
             Types[TWeights[4]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //  Parts    
         
         TWeights[5] = 7;
@@ -71,7 +71,7 @@ var Spawn = {
             Types[TWeights[5]][0] = 'rangedguard';  // Type Name   
             Types[TWeights[5]][1] = 0;  //   Type Min 
             Types[TWeights[5]][4] = 1049; // Cost
-            Types[TWeights[5]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'combat' && creep.memory.subrole == 'rangedguard' && creep.memory.roomName == RoomName).length;  // Type Current
+            Types[TWeights[5]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'combat' && creep.memory.subrole === 'rangedguard' && creep.memory.roomName === RoomName).length;  // Type Current
             Types[TWeights[5]][3] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK]; //  Parts    
         
         TWeights[6] = 4;
@@ -79,7 +79,7 @@ var Spawn = {
             Types[TWeights[6]][0] = 'tharvester';   // Type Name   
             Types[TWeights[6]][1] = 1;  //   Type Min 
             Types[TWeights[6]][4] = 949;  // Cost
-            Types[TWeights[6]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'tharvester' && creep.memory.roomName == RoomName).length;   // Type Current
+            Types[TWeights[6]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'tharvester' && creep.memory.roomName === RoomName).length;   // Type Current
             Types[TWeights[6]][3] = [WORK,WORK,CARRY,CARRY,CARRY,CARRY,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //  Parts    
         
         TWeights[7] = 9;
@@ -87,7 +87,7 @@ var Spawn = {
             Types[TWeights[7]][0] = 'atcontroller'; // Type Name   
             Types[TWeights[7]][1] = 0;  //   Type Min 
             Types[TWeights[7]][4] = 849;  // Cost
-            Types[TWeights[7]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'combat' && creep.memory.subrole == 'atcontroller' && creep.memory.roomName == RoomName).length;  // Type Current
+            Types[TWeights[7]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'combat' && creep.memory.subrole === 'atcontroller' && creep.memory.roomName === RoomName).length;  // Type Current
             Types[TWeights[7]][3] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
         
         TWeights[8] = 1;
@@ -95,7 +95,7 @@ var Spawn = {
             Types[TWeights[8]][0] = 'gather';       // Type Name   
             Types[TWeights[8]][1] = 1;  //   Type Min 
             Types[TWeights[8]][4] = 949;  // Cost
-            Types[TWeights[8]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'gather' && creep.memory.roomName == RoomName).length;   // Type Current
+            Types[TWeights[8]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'gather' && creep.memory.roomName === RoomName).length;   // Type Current
             Types[TWeights[8]][3] = [WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE]; //  Parts    
         
         TWeights[9] = 2;
@@ -103,7 +103,7 @@ var Spawn = {
             Types[TWeights[9]][0] = 'haul';         // Type Name   
             Types[TWeights[9]][1] = 1;  //   Type Min 
             Types[TWeights[9]][4] = 949;  // Cost
-            Types[TWeights[9]][2] = _.filter(Game.creeps, (creep) => creep.memory.role == 'haul' && creep.memory.roomName === RoomName).length;  // Type Current
+            Types[TWeights[9]][2] = _.filter(Game.creeps, (creep) => creep.memory.role === 'haul' && creep.memory.roomName === RoomName).length;  // Type Current
             Types[TWeights[9]][3] = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE]; //  Parts    
         
         for (j=SpawnRange.length; j > 0 && !toggle;j--) {

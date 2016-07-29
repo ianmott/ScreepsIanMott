@@ -1,6 +1,6 @@
 /** @module util */
 
-let _ = require('lodash');
+const _ = require('lodash');
 
 /**
  * @param {function} fn
