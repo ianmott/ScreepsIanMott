@@ -147,9 +147,9 @@ var Spawn = {
                 stringbuilder += ' '+Types[TWeights[i]][0].substring(0,2)+' #'+TWeights[i]+' '+Types[TWeights[i]][2]+'/'+Types[TWeights[i]][1];
                 totalCreeps += Types[TWeights[i]][2];
                 maxCreeps +=Types[TWeights[i]][1];
-                if (currentRoomType === 'P') {
+                if (currentRoomType === roomTypes[0]) {
                 }
-                if (currentRoomType === 'S') {
+                if (currentRoomType === roomTypes[1]) {
                     if (i ===TWeights[0] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2] )
                         Types[i][1] = 1; 
                     else 
@@ -182,12 +182,12 @@ var Spawn = {
                     if (Game.rooms[RoomName].energyCapacityAvailable > Types[i][4]){
                         SpawnRangeResult = Types[i][4];
                     }
-                    if (Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult){
+                    if (Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult && SpawnRange[RangeID] < SpawnRangeResult){
                         Parts = Types[i][3];
                     } 
                     //console.log('rid ' + RangeID+'P '+Parts);
                     
-                    if (Types[i][1] < Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult && !toggle){         
+                    if (Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult && !toggle){         
                         var newName = spawn.createCreep(Parts, undefined, {role: Types[i][0]});
                         if (Game.creeps[newName]){ Game.creeps[newName].memory.roomName = RoomName;}
                         if (Game.creeps[newName] && Types[i][5] !== ''){ Game.creeps[newName].memory.subrole = Types[i][5]; Game.creeps[newName].memory.targetRoomName = TargetRoom;}
