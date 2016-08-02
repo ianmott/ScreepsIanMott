@@ -42,7 +42,7 @@ module.exports.run = function() {
                             }
                         }
                     }
-                    else if (_.some(towers) && towers[0].energy > 600 && _.filter(Game.creeps, (creep) => creep.memory.role === 'tharvester').length >0) { 
+                    else if (_.some(towers) && towers[0].energy > 650 && _.filter(Game.creeps, (creep) => creep.memory.role === 'tharvester').length >0) { 
                             targets = _.sortBy(room.find(FIND_STRUCTURES, { filter: s => should.tower.repair(s) }), s => s.hits);  
                             if (_.some(targets)) { while (_.some(towers) && _.some(targets)) { 
                                 towers.shift().repair(targets.shift()); 
