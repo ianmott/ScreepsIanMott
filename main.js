@@ -13,8 +13,6 @@ const controller_tower = require('./controller_tower');
 const SpawnSystem = require('Spawn');
 const DebugMode = true;
 module.exports.loop = function() {
-    //for (let name in Memory.creeps) { if (Game.creeps[name]) { Game.creeps[name].memory.roomName = RoomNames[0]; } }
-    //for (i=0;i<RoomNum;i++) { SpawnSystem.run(RoomNames[i]); }
     const TargetRoom = 'W44S36';
     PathFinder.use(true);
     
@@ -38,9 +36,9 @@ module.exports.loop = function() {
         if (creep.memory.role === 'repairer') { rolerepairer.run(creep); }
         if (creep.memory.role === 'gather') { rolegather.run(creep);}
         if (creep.memory.role === 'haul') { rolehaul.run(creep);}
-        if (creep.memory.role === 'rh' || creep.memory.role === 'rg') { roleremote.run(creep,creep.memory.role);}
+        if (creep.memory.role === 'remote') { roleremote.run(creep,creep.memory.subrole);}
         if (creep.memory.role === 'combat') { rolecombat.run(creep, creep.memory.subtype);}
-        
+      
     }
     //console.log(Game.time);
 };

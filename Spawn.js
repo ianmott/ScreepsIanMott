@@ -178,7 +178,7 @@ var Spawn = {
                 if (currentRoomType === roomTypes[0]) {
                 }
                 if (currentRoomType === roomTypes[1]) {
-                    if (i ===TWeights[7] || i===TWeights[8] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2] )
+                    if (i ===TWeights[7] || i===TWeights[8] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2] )//|| i===TWeights[9] || i===TWeights[10] )
                         Types[i][1] = 1; 
                     else 
                         Types[i][1] = 0;
@@ -252,7 +252,6 @@ var Spawn = {
                         if (Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult){         
                             var newName = spawn.createCreep(Parts, undefined, {role: Types[i][0]});
                             if (Game.creeps[newName]){ Game.creeps[newName].memory.roomName = RoomName;}
-                            if (Game.creeps[newName] && Types[i][5] !== ''){ Game.creeps[newName].memory.subrole = Types[i][5]; Game.creeps[newName].memory.targetRoomName = TargetRoom;}
                             if (DebugMode) console.log('SRange '+SpawnRangeResult+' Spawning new '+Types[i][0]+': ' + newName + ' Parts: '+Parts+' Room: '+RoomName);
                             toggle = true;
                         }

@@ -14,7 +14,7 @@ var roleGather = {
             creep.memory.harvesting = true;
         }
         
-        const flag = Game.flags['Flag1'];
+        const flag = Game.flags['R1'];
         const flag2 = Game.flags['Flag2'];
         const targetRoomName = flag.pos.roomName;
         if (role === 'rh')
@@ -52,7 +52,7 @@ var roleGather = {
         }
         if (role === 'rg')
         {
-            if (creep.room.name !== targetRoomName){
+            if (creep.room.name !== targetRoomName ){
                 if (creep.moveTo(flag)){
                     creep.moveTo(flag);
                 }
