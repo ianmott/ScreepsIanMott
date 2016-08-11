@@ -184,8 +184,8 @@ var Spawn = {
 
         //console.log('rid '+RangeID+' srr '+SpawnRangeResult+' p '+Parts);
         
-          
-        if (Types[TWeights[0]][2] === 0 && totalCreeps < 2 && !spawn.spawning){
+    if (spawn)
+        if ( Types[TWeights[0]][2] === 0 && totalCreeps < 2 && !spawn.spawning){
                 const newName = spawn.createCreep(PartsA[0], undefined, {role: Types[TWeights[0]][0]});
                 if (Game.creeps[newName]){ Game.creeps[newName].memory.roomName = RoomName;}
                 if (DebugMode) console.log('Recovery Harvester Being Spawned Check Code! Name:' + newName + ' Parts: '+PartsA[0]+' Room: '+RoomName);
@@ -240,12 +240,8 @@ var Spawn = {
                         if (Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult){    
                             
                              
-                            console.log(Types[i][0]+' '+Parts);   
-                            var newName = spawn.createCreep(Parts, undefined, {role: Types[i][0]});
-                            
-                            if (Game.creeps[newName]){ Game.creeps[newName].memory.roomName = RoomName;}
-                            if (Game.creeps[newName] && Types[i][5] !== '') { Game.creeps[newName].memory.subrole = Types[i][5];}
-                            if (Game.creeps[newName]){ Game.creeps[newName].memory.targetRoomName = TargetRoom;}
+                            //console.log(Types[i][0]+' '+Parts);   
+                            var newName = spawn.createCreep(Parts, undefined, {role: Types[i][0], roomName: RoomName, subrole: Types[i][5], targetRoomName: TargetRoom});
                             if (DebugMode && Game.creeps[newName]) console.log('SRange '+SpawnRangeResult+' Spawning new '+Types[i][0]+': ' + newName + ' Parts: '+Parts+' Room: '+RoomName);
                             toggle = true;
                         }

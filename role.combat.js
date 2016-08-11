@@ -10,7 +10,7 @@
 
 var roleguard = {
     run: function(creep,subrole) {
-        const flag = Game.flags['R1'];
+        const flag = Game.flags['T1'];
         const flag2 = Game.flags['Flag2'];
         const targetRoomName = flag.pos.roomName;
 
@@ -23,23 +23,23 @@ var roleguard = {
         if (subrole === 'guard'){
  
             if (creep.room.name !== targetRoomName ){
-                if (creep.moveTo(flag)){
-                    creep.moveTo(flag);
+                if (creep.moveTo(flag, {reusePath: 10})){
+                    creep.moveTo(flag, {reusePath: 10});
                 }
             } else
             if(targets.length > 0) {
-                if(creep.moveTo(targets[0])) {
-                    creep.moveTo(targets[0]);
+                if(creep.moveTo(targets[0], {reusePath: 10})) {
+                    creep.moveTo(targets[0], {reusePath: 10});
                     creep.attack(targets[0]);
                 }
             }else {
-                if(creep.moveTo(creep.room.controller) !== ERR_NOT_IN_RANGE) {
-                    creep.moveTo(creep.room.controller);
+                if(creep.moveTo(creep.room.controller, {reusePath: 10}) !== ERR_NOT_IN_RANGE) {
+                    creep.moveTo(creep.room.controller, {reusePath: 10});
                 }
             }
         }
         if (subrole === 'rangedguard'){
-            if (creep.room.name !== targetRoomName ){
+            if (creep.room.name !== targetRoomName  ){
                 if (creep.moveTo(flag)){
                     creep.moveTo(flag);
                 }
@@ -49,12 +49,16 @@ var roleguard = {
                     creep.moveTo(targets[0], {reusePath: 10});
                     creep.rangedAttack(targets[0]);
                 }
+            } else {
+                if(creep.moveTo(creep.room.controller, {reusePath: 10}) !== ERR_NOT_IN_RANGE) {
+                    creep.moveTo(creep.room.controller, {reusePath: 10});
+                }
             }
         }
         if (subrole === 'atcontroller'){
             if (creep.room.name !== targetRoomName ){
-                if (creep.moveTo(flag)){
-                    creep.moveTo(flag);
+                if (creep.moveTo(flag, {reusePath: 10})){
+                    creep.moveTo(flag, {reusePath: 10});
                 }
             } else
             {

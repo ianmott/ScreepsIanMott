@@ -20,7 +20,7 @@ Memory.rooms = [];
 Memory.rooms[0] = 'W44S38';
 //Memory.rooms[0].push('P');
 Memory.rooms[1] = 'W44S37' ;
-Memory.rooms[2] = 'W45S37';
+Memory.rooms[2] = 'W45S38';
 
 module.exports.loop = function() {
     PathFinder.use(true);
