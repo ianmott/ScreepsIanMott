@@ -25,6 +25,9 @@ var Spawn = {
         PartsC[1] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK];
         PartsC[2] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE];
 
+        for (i = 0; i < NumofSpawns;i++){
+            SpawnRange[i] = 299+i*100;
+        }
         var SpawnRangeResult = SpawnRange[0];
         
         PartsA[0]= [WORK,WORK,CARRY,MOVE]; // 300
@@ -190,17 +193,18 @@ var Spawn = {
                 if  (!spawn.spawning){
                     for (i=0; i <NumofTypes && !toggle; i++){
                         SpawnRangeResult = SpawnRange[RangeID];
-                            Parts = PartsA[RangeID];
+                        Parts = PartsA[RangeID];
+                        //console.log(Types[i][0]+' '+SpawnRangeResult);
                             if (Types[i][0] === 'combat'){
                                 Parts = PartsC[0];
-                                if (Types[i][5] === 'rangedguard')
-                                    Parts = PartsC[1];
-                                if (Types[i][5] === 'atcontroller')
-                                    Parts = PartsC[2];
+                                if (Types[i][5] === 'rangedguard'){
+                                    Parts = PartsC[1];}
+                                if (Types[i][5] === 'atcontroller'){
+                                    Parts = PartsC[2];}
                                 
                                 SpawnRangeResult = 849;         
                                 
-                            } else
+                            } else {
                                 if (Types[i][0] === 'remote'){
                                     if (Types[i][5] === 'rh'){
                                         Parts = Types[TWeights[9]][3];
@@ -210,9 +214,9 @@ var Spawn = {
                                         Parts = Types[TWeights[10]][3];
                                         SpawnRangeResult = Types[TWeights[10]][4];
                                     }
-                                } else
+                                } else{
                                     //console.log('rid ' + RangeID+'P '+Parts);
-                                    if (Game.rooms[RoomName].energyCapacityAvailable > 649 && SpawnRangeResult > 649 && Types[i][0] === 'gather' ||  Types[i][0] === 'haul' ){
+                                    if (Game.rooms[RoomName].energyCapacityAvailable > 649 && Types[i][0] === 'gather' ||  Types[i][0] === 'haul' ){
                                         if (Types[i][0] === 'gather' ){
                                             Parts = [WORK,WORK,WORK,WORK,WORK,WORK,MOVE];
                                             SpawnRangeResult = 649;
@@ -222,11 +226,17 @@ var Spawn = {
                                             SpawnRangeResult = 649;
                                         }
                                     }
+                                }
+                            }
+                        if (!SpawnRangeResult){
+                            Parts = PartsA[RangeID];    
+                            SpawnRangeResult = SpawnRange[RangeID];
+                        }
                         //console.log(Types[i][1] > Types[i][2]);
-                        //console.log(!spawn.spawning);
+                        //console.log(Types[i][0]+' '+SpawnRangeResult);
                             //console.log(Types[i][0]+' '+Parts); 
                             //console.log(Types[i][0]);
-                            //console.log(Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult);
+                            //console.log( Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult);
                         if (Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult){    
                             
                              

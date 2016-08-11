@@ -10,21 +10,21 @@
 
 var roleguard = {
     run: function(creep,subrole) {
-            var targetRoomName = creep.memory.targetRoomName;
-            var targetPos = (0,42);
-            //if (Game.rooms[creep.room.name])
-            //    targetPos = creep.room.findExitTo(targetRoomName);
-                       var targets = creep.room.find(Game.HOSTILE_CREEPS, {
-                    filter: (creep) => {
-                        return (creep.hits < creep.hitsMax);
-                    }
-            });
+        const flag = Game.flags['R1'];
+        const flag2 = Game.flags['Flag2'];
+        const targetRoomName = flag.pos.roomName;
+
+        var targets = creep.room.find(Game.HOSTILE_CREEPS, {
+             filter: (creep) => {
+                 return (creep.hits < creep.hitsMax);
+             }
+         });
                 
         if (subrole === 'guard'){
  
-            if (creep.room.roomName !== targetRoomName){
-                if (creep.moveTo(targetPos)){
-                    creep.moveTo(targetPos);
+            if (creep.room.name !== targetRoomName ){
+                if (creep.moveTo(flag)){
+                    creep.moveTo(flag);
                 }
             } else
             if(targets.length > 0) {
@@ -39,9 +39,9 @@ var roleguard = {
             }
         }
         if (subrole === 'rangedguard'){
-            if (creep.room.roomName !== targetRoomName){
-                if (creep.moveTo(targetPos)){
-                    creep.moveTo(targetPos);
+            if (creep.room.name !== targetRoomName ){
+                if (creep.moveTo(flag)){
+                    creep.moveTo(flag);
                 }
             } else
             if(targets.length > 0) {
@@ -52,9 +52,9 @@ var roleguard = {
             }
         }
         if (subrole === 'atcontroller'){
-            if (creep.room.roomName !== targetRoomName){
-                if (creep.moveTo(targetPos)){
-                    creep.moveTo(targetPos);
+            if (creep.room.name !== targetRoomName ){
+                if (creep.moveTo(flag)){
+                    creep.moveTo(flag);
                 }
             } else
             {
