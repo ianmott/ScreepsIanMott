@@ -10,8 +10,8 @@ module.exports.run = function() {
     for (let roomName in towersByRoomName) {
         let towers = towersByRoomName[roomName];
         let room = Game.rooms[roomName];
-
-        let targets = _.sortBy(room.find(FIND_HOSTILE_CREEPS), c => c.hits);
+        
+        let targets = _.sortBy(room.find(FIND_HOSTILE_CREEPS), c => c.hits &&  c.owner.username !== Memory.alliance[0] && c.owner.username !== Memory.alliance[1]);
         if (_.some(targets)) { 
             _.forEach(towers, t => t.attack(targets[0])); 
         }

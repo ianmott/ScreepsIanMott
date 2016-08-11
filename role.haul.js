@@ -12,7 +12,7 @@ var targetPos = new RoomPosition(12,11, targetRoomName);
         if(creep.memory.harvesting && creep.carry.energy === 0) {
             creep.memory.harvesting = false;
         }
-        if(!creep.memory.harvesting && creep.carry.energy === creep.carryCapacity) {
+        if(!creep.memory.harvesting && creep.carry.energy >= creep.carryCapacity-1) {
             creep.memory.harvesting = true;
         }
         if (creep.memory.roomName === targetRoomName && creep.room.name != targetRoomName)        {        creep.moveTo(targetPos);        } else 

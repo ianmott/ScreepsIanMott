@@ -12,7 +12,7 @@ var Spawn = {
     	var RangeID = 0;
     	var PartsA = new Array(NumofSpawns); 
     	const NumofCombatTypes = 3;
-    	var PartsC = new Array(NumofSpawns); 
+    	var PartsC = new Array(NumofCombatTypes); 
     	const NumofTypes = 11;
     	const numofFields = 6;
     	var TWeights = new Array(NumofTypes);
@@ -21,31 +21,10 @@ var Spawn = {
         var stringbuilder = ' RC: '+Game.rooms[RoomName].controller.progress+'/'+Game.rooms[RoomName].controller.progressTotal+
                                 ' ECap: '+Game.rooms[RoomName].energyCapacityAvailable+' E: '+Game.rooms[RoomName].energyAvailable;
                                 
-        for(i=0;i<NumofSpawns;i++){
-            SpawnRange[i]=299+i*100;
-            PartsC[i] = new Array(NumofCombatTypes);
-            PartsC[i][0] = 'TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,MOVE';
-            PartsC[i][1] = 'TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK';
-            PartsC[i][2] = 'CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE';
-            
-            if(i*1 > 0){
-                for (j=0;j<NumofCombatTypes;j++){
-                    switch (j){
-                        case 0:
-                            for (k=0;k<i;k++)
-                                PartsC[i][0] = 'ATTACK,'+PartsC[i][j] 
-                            break;
-                        case 1:
-                            for (k=0;k<i;k++)
-                                PartsC[i][1] = 'TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,'+PartsC[i][j] 
-                            break;
-                    }
-                }
-            }
-            
-            //for (j=0;j<NumofCombatTypes;j++)PartsC[i][j] = [PartsC[i][j]];
-            //console.log(PartsC[i][0]+' '+ PartsC[i][1])
-        }
+        PartsC[0] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE,MOVE,MOVE,MOVE];
+        PartsC[1] = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK];
+        PartsC[2] = [CLAIM,MOVE,MOVE,MOVE,MOVE,MOVE];
+
         var SpawnRangeResult = SpawnRange[0];
         
         PartsA[0]= [WORK,WORK,CARRY,MOVE]; // 300
@@ -60,11 +39,8 @@ var Spawn = {
         //PartsA[9]= [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; // 1200
         //PartsA[10]= [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; // 1300
         //PartsA[11]= [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; // 1400
- 	    
 
-        
-        var Parts = PartsA[0];
-        
+        var Parts = PartsA[0];  
         
         roomTypes[0] = 'P'; // Primary
         roomTypes[1] = 'S'; // Secondary
@@ -82,7 +58,7 @@ var Spawn = {
         Types[TWeights[1]] = new Array(numofFields); 
             Types[TWeights[1]][0] = 'combat';     // Type Name      
             Types[TWeights[1]][1] = 0;  //   Type Min 
-            Types[TWeights[1]][4] = 1049; // Cost
+            Types[TWeights[1]][4] = 999; // Cost
             Types[TWeights[1]][3] = ''; //  Parts    
             Types[TWeights[1]][5] = 'guard';
             
@@ -101,13 +77,12 @@ var Spawn = {
             Types[TWeights[3]][4] = 949;  // Cost
             Types[TWeights[3]][3] = ''; //  Parts    
             Types[TWeights[3]][5] = '';
-            
-            
+             
         TWeights[4] = 6;
         Types[TWeights[4]] = new Array(numofFields); 
             Types[TWeights[4]][0] = 'combat';  // Type Name   
             Types[TWeights[4]][1] = 0;  //   Type Min 
-            Types[TWeights[4]][4] = 1049; // Cost
+            Types[TWeights[4]][4] = 999; // Cost
             Types[TWeights[4]][3] = ''; //  Parts    
             Types[TWeights[4]][5] = 'rangedguard';
             
@@ -159,7 +134,6 @@ var Spawn = {
             Types[TWeights[10]][3] = [MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,WORK]; //  Parts    
             Types[TWeights[10]][5] = 'rg';
         
-        
         if (RoomName === 'W44S38') {
             currentRoomType = roomTypes[0];
         }
@@ -178,7 +152,7 @@ var Spawn = {
                 if (currentRoomType === roomTypes[0]) {
                 }
                 if (currentRoomType === roomTypes[1]) {
-                    if (i ===TWeights[7] || i===TWeights[8] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2] )//|| i===TWeights[9] || i===TWeights[10] )
+                    if (i ===TWeights[7] || i===TWeights[8] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2] || i===TWeights[6] || i===TWeights[4] )
                         Types[i][1] = 1; 
                     else 
                         Types[i][1] = 0;
@@ -207,7 +181,7 @@ var Spawn = {
 
         //console.log('rid '+RangeID+' srr '+SpawnRangeResult+' p '+Parts);
         
-        
+          
         if (Types[TWeights[0]][2] === 0 && totalCreeps < 2 && !spawn.spawning){
                 const newName = spawn.createCreep(PartsA[0], undefined, {role: Types[TWeights[0]][0]});
                 if (Game.creeps[newName]){ Game.creeps[newName].memory.roomName = RoomName;}
@@ -215,44 +189,54 @@ var Spawn = {
             } else {
                 if  (!spawn.spawning){
                     for (i=0; i <NumofTypes && !toggle; i++){
-                        
-                        if (Types[i][0] === 'combat'){
-                            var subtypeid = 0;
-                            if (Types[i][5] === 'rangedguard')
-                                subtypeid = 1;
-                            if (Types[i][5] === 'atcontroller')
-                                subtypeid = 2;
-
-                            Parts = PartsC[RangeID][subtypeid];
-                        } else
-                            if (Types[i][0] === 'remote'){
-                                if (Types[i][5] === 'rh'){
-                                    Parts = Types[TWeights[9]][3];
-                                    SpawnRangeResult = Types[TWeights[9]][4];
-                                }
-                                if (Types[i][5] === 'rg'){
-                                    Parts = Types[TWeights[10]][3];
-                                    SpawnRangeResult = Types[TWeights[10]][4];
-                                }
+                        SpawnRangeResult = SpawnRange[RangeID];
+                            Parts = PartsA[RangeID];
+                            if (Types[i][0] === 'combat'){
+                                Parts = PartsC[0];
+                                if (Types[i][5] === 'rangedguard')
+                                    Parts = PartsC[1];
+                                if (Types[i][5] === 'atcontroller')
+                                    Parts = PartsC[2];
+                                
+                                SpawnRangeResult = 849;         
+                                
                             } else
-                                //console.log('rid ' + RangeID+'P '+Parts);
-                                if (Game.rooms[RoomName].energyCapacityAvailable > 649 && SpawnRangeResult > 649 && Types[i][0] === 'gather' ||  Types[i][0] === 'haul' ){
-                                    if (Types[i][0] === 'gather' ){
-                                        Parts = [WORK,WORK,WORK,WORK,WORK,WORK,MOVE];
-                                        SpawnRangeResult = 649;
+                                if (Types[i][0] === 'remote'){
+                                    if (Types[i][5] === 'rh'){
+                                        Parts = Types[TWeights[9]][3];
+                                        SpawnRangeResult = Types[TWeights[9]][4];
                                     }
-                                    if (Types[i][0] === 'haul' ){
-                                        Parts = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];
-                                        SpawnRangeResult = 649;
+                                    if (Types[i][5] === 'rg'){
+                                        Parts = Types[TWeights[10]][3];
+                                        SpawnRangeResult = Types[TWeights[10]][4];
                                     }
-                                } else {
-                                    SpawnRangeResult = SpawnRange[RangeID];
-                                    Parts = PartsA[RangeID];
-                                }
-                        if (Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult){         
+                                } else
+                                    //console.log('rid ' + RangeID+'P '+Parts);
+                                    if (Game.rooms[RoomName].energyCapacityAvailable > 649 && SpawnRangeResult > 649 && Types[i][0] === 'gather' ||  Types[i][0] === 'haul' ){
+                                        if (Types[i][0] === 'gather' ){
+                                            Parts = [WORK,WORK,WORK,WORK,WORK,WORK,MOVE];
+                                            SpawnRangeResult = 649;
+                                        }
+                                        if (Types[i][0] === 'haul' ){
+                                            Parts = [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];
+                                            SpawnRangeResult = 649;
+                                        }
+                                    }
+                        //console.log(Types[i][1] > Types[i][2]);
+                        //console.log(!spawn.spawning);
+                            //console.log(Types[i][0]+' '+Parts); 
+                            //console.log(Types[i][0]);
+                            //console.log(Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult);
+                        if (Types[i][1] > Types[i][2] && !spawn.spawning && Game.rooms[RoomName].energyAvailable > SpawnRangeResult  && Game.rooms[RoomName].energyCapacityAvailable > SpawnRangeResult){    
+                            
+                             
+                            console.log(Types[i][0]+' '+Parts);   
                             var newName = spawn.createCreep(Parts, undefined, {role: Types[i][0]});
+                            
                             if (Game.creeps[newName]){ Game.creeps[newName].memory.roomName = RoomName;}
-                            if (DebugMode) console.log('SRange '+SpawnRangeResult+' Spawning new '+Types[i][0]+': ' + newName + ' Parts: '+Parts+' Room: '+RoomName);
+                            if (Game.creeps[newName] && Types[i][5] !== '') { Game.creeps[newName].memory.subrole = Types[i][5];}
+                            if (Game.creeps[newName]){ Game.creeps[newName].memory.targetRoomName = TargetRoom;}
+                            if (DebugMode && Game.creeps[newName]) console.log('SRange '+SpawnRangeResult+' Spawning new '+Types[i][0]+': ' + newName + ' Parts: '+Parts+' Room: '+RoomName);
                             toggle = true;
                         }
                     }
