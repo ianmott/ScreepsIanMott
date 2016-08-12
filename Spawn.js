@@ -30,8 +30,8 @@ var Spawn = {
         }
         var SpawnRangeResult = SpawnRange[0];
         
-        PartsA[0]= [WORK,WORK,CARRY,MOVE]; // 300
-        PartsA[1]= [WORK,WORK,CARRY,CARRY,CARRY,MOVE];  // 400
+        PartsA[0]= [WORK,CARRY,CARRY,MOVE,MOVE]; // 300
+        PartsA[1]= [WORK,WORK,CARRY,CARRY,MOVE,MOVE];  // 400
         PartsA[2]= [WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]; // 500
         PartsA[3]= [WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]; // 600
         PartsA[4]= [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; // 700
@@ -140,7 +140,7 @@ var Spawn = {
         if (RoomName === 'W44S38') {
             currentRoomType = roomTypes[0];
         }
-        if (RoomName === 'W44S37') {
+        if (RoomName === 'W44S37' || RoomName === 'W45S38') {
             currentRoomType = roomTypes[1];
         }
          // Setup Loop
@@ -154,11 +154,13 @@ var Spawn = {
                 // Change Creep Max's By Room Type 
                 if (currentRoomType === roomTypes[0]) {
                 }
-                if (currentRoomType === roomTypes[1]) {
-                    if (i ===TWeights[7] || i===TWeights[8] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2] || i===TWeights[6] || i===TWeights[4] )
+                if (currentRoomType === roomTypes[1]) { // || i===TWeights[6] 
+                    if (i ===TWeights[7] || i===TWeights[5] || i===TWeights[3] || i===TWeights[2]|| i===TWeights[4] )
                         Types[i][1] = 1; 
                     else 
                         Types[i][1] = 0;
+                    if (i===TWeights[8])
+                        Types[i][1] = 2; 
                 }
                 
                 // Builds Creep Type output

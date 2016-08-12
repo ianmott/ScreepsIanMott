@@ -15,7 +15,13 @@ var energy = creep.pos.findInRange(
                 15
             );
             var t = 0;
-            
+            const flag = Game.flags['T1'];
+        const targetRoomName = flag.pos.roomName;
+            if (creep.room.name !== targetRoomName && false){
+                if (creep.moveTo(flag)){
+                    creep.moveTo(flag);
+                }
+            } else
             if (energy.length && creep.carry.energy !== creep.carryCapacity) {
                 //console.log('found ' + energy[t].energy + ' energy at ', energy[t].pos);
                 if(creep.moveTo(energy[t], {reusePath: 10}) === ERR_NOT_IN_RANGE) {
